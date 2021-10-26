@@ -1,10 +1,11 @@
 import React from 'react';
-import * as S from './style'
+import * as S from './styles'
+import Banner from '../../Components/Banner/Banner';
 const MainPage:React.FC = () => {
     return(
-        <div>
-
-        </div>
+        <S.MainPageWrapper>
+            <Banner/>
+        </S.MainPageWrapper>
     )
 }
 export default MainPage;
