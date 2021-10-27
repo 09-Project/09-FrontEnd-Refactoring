@@ -12,8 +12,10 @@ export const HeaderBottomWrapper = styled.section`
     align-items: center;
     > div {
         width: 1150px;
+        height: 100%;
         margin: 0 auto;
         display: flex;
+        align-items: center;
         justify-content: space-between;
     }
 `
