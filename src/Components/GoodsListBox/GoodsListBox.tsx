@@ -15,7 +15,7 @@ const GoodsListBox = () => {
         else setStartPageIndex(startPageIndex + 1);
     }
     useEffect(()=> {
-        axios.get(API_HOST+'/post').then(res=>setThisPageList(res.data))
+        axios.get(API_HOST+'/post').then(res=>setThisPageList(res.data.posts))
     },[selectedPage])
     return(
         <S.GoodsListBoxWrapper>
