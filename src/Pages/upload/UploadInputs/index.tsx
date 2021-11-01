@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './styles';
 
 interface ArrayType {
@@ -25,6 +25,14 @@ function UploadInput(){
             placeholder : '오픈채팅방 링크를 입력해주세요'
         }
     ]
+    const [content,setContent] = useState({
+        title : '',
+        contnet : '',
+        price : '',
+        transactionRegion : '',
+        openChatLink : '',
+        image : ''
+    })
     return(
         <form>
             <S.UploadInputWrapper>
