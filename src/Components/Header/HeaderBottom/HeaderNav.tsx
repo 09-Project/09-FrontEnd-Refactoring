@@ -2,15 +2,18 @@ import React from 'react';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare,faUserAlt,faHeart } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 const HeaderNav = () => {
     return(
         <S.NavWrapper>
-            <S.NavA>
-                <li>
-                    <i><FontAwesomeIcon icon={faPlusSquare}/></i>
-                    <p>게시물 올리기</p>
-                </li>
-            </S.NavA>
+            <Link to="/upload">
+                <S.NavA>
+                    <li>
+                        <i><FontAwesomeIcon icon={faPlusSquare}/></i>
+                        <p>게시물 올리기</p>
+                    </li>
+                </S.NavA>
+            </Link>
             <S.Line/>
             <S.NavA>
                 <li>
