@@ -1,7 +1,7 @@
 import MainPage from "./Pages/MainPage/MainPage";
 import Header from "./Components/Header/Header";
 import { BrowserRouter,Switch,Route } from "react-router-dom";
-import Upload from "./Pages/upload/Upload";
+import Upload from "./Pages/upload";
 const App:React.FC = () => {
   return (
     <BrowserRouter>

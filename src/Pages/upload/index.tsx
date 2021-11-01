@@ -3,7 +3,7 @@ import * as S from './styles';
 import Radio from './UploadTypeRadio';
 import UploadImg from './UploadImg';
 import UploadInput from './UploadInputs';
-const Upload = () => {
+const upload = () => {
     return(
         <S.UploadPageWrapper>
             <S.TitleWrapper>
@@ -16,4 +16,4 @@ const Upload = () => {
         </S.UploadPageWrapper>
     )
 }
-export default Upload;
+export default upload;
