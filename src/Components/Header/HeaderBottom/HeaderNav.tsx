@@ -15,12 +15,14 @@ const HeaderNav = () => {
                 </S.NavA>
             </Link>
             <S.Line/>
-            <S.NavA>
-                <li>
-                    <i><FontAwesomeIcon icon={faUserAlt}/></i>
-                    <p>마이페이지</p>
-                </li>
-            </S.NavA>
+            <Link to="/profile">
+                <S.NavA>
+                    <li>
+                        <i><FontAwesomeIcon icon={faUserAlt}/></i>
+                        <p>마이페이지</p>
+                    </li>
+                </S.NavA>
+            </Link>
             <S.Line/>
             <S.NavA>
                 <li>
