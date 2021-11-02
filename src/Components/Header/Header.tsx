@@ -2,11 +2,15 @@ import React,{useState} from 'react';
 import HeaderBottom from './HeaderBottom/HeaderBottom';
 import HeaderTop from './HeaderTop';
 import * as S from './styles';
-const Header:React.FC = () => {
+interface PropsType {
+    setLogin : (e:boolean) => void;
+}
+const Header = (props:PropsType) => {
+    const {setLogin} = props;
     const [isLogin,setIsLogin] = useState(false);
     return(
         <S.HeaderWrapper>
-            <HeaderTop isLogin={isLogin}/>
+            <HeaderTop setLogin={setLogin} isLogin={isLogin}/>
             <HeaderBottom/>
         </S.HeaderWrapper>
     )

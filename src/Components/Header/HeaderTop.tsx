@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 type PropsType = {
-    isLogin : boolean
+    isLogin : boolean;
+    setLogin : (e:boolean) => void;
 }
 const HeaderTopWrapper = styled.section`
     width: 1150px;
@@ -24,7 +25,7 @@ const LoginStatusDiv = styled.section`
     }
 `
 
-const HeaderTop = ({isLogin}:PropsType) => {
-    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p>로그인</p><div>/</div><p>회원가입</p></LoginStatusDiv>}</HeaderTopWrapper>
+const HeaderTop = ({isLogin,setLogin}:PropsType) => {
+    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p onClick={()=>setLogin(true)}>로그인</p><div>/</div><p>회원가입</p></LoginStatusDiv>}</HeaderTopWrapper>
 }
 export default HeaderTop;

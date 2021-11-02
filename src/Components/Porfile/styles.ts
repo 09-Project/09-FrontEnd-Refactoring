@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ProfileWrapper = styled.section`
     width: 1150px;
-    margin: 0 auto;
+    margin: 0 auto 224px auto;
 `
 export const Title = styled.h1`
     padding: 55px 0 55px 37px;
