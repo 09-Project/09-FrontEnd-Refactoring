@@ -25,7 +25,7 @@ function LoginModal(props:PropsType){
                         <S.Input placeholder="PASSWORD"/>
                     </S.InputWrapper>
                     <S.SaveID>
-                        <S.Checkbox type="checkbox"/>xz
+                        <S.Checkbox type="checkbox"/>
                         <p>아이디 저장</p>
                     </S.SaveID>
                     <S.ButtonWrapper>
