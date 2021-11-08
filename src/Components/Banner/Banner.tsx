@@ -1,7 +1,11 @@
 import React from 'react';
 import * as S from './styles';
-import Banner_09 from '../../assets/images/banner_09.jpg'
-const Banner = () => {
-    return <S.BannerWrapper isLarge={true} img={Banner_09} />
+
+interface PropsType {
+    isLarge : boolean;
+    img : any;
+}
+const Banner = (props:PropsType) => {
+    return <S.BannerWrapper isLarge={props.isLarge} img={props.img} />
 }
 export default Banner;
