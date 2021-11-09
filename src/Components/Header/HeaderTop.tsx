@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+
 type PropsType = {
     isLogin : boolean;
     setLogin : (e:boolean) => void;
@@ -26,6 +29,6 @@ const LoginStatusDiv = styled.section`
 `
 
 const HeaderTop = ({isLogin,setLogin}:PropsType) => {
-    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p onClick={()=>setLogin(true)}>로그인</p><div>/</div><p>회원가입</p></LoginStatusDiv>}</HeaderTopWrapper>
+    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p onClick={()=>setLogin(true)}>로그인</p><div>/</div><Link to="/signup"><p>회원가입</p></Link></LoginStatusDiv>}</HeaderTopWrapper>
 }
 export default HeaderTop;
