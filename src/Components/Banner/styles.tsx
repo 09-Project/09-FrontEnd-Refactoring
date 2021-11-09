@@ -11,5 +11,6 @@ export const BannerWrapper = styled.section`
     background-image: url(${(props:Styles)=>props.img});
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
     margin: 0 auto;
 `
