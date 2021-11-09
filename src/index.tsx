@@ -4,13 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './assets/styles/global-style';
-import {theme} from './assets/styles/theme';
 import { ThemeProvider } from 'styled-components';
+import { createStore } from 'redux';
+import rootReducer from './modules/redux';
+import { Provider } from 'react-redux';
+
+const store = createStore(rootReducer);
+
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <Provider store={store}>
     <GlobalStyle/>
     <App />
-  </ThemeProvider>,
+  </Provider>,
   document.getElementById('root')
 );
 
