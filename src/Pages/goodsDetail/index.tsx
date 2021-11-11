@@ -4,7 +4,10 @@ import * as S from './styles'
 import { useLocation } from 'react-router';
 import axios from 'axios';
 import DefaultProfile from '../../assets/images/defaultProfile.svg'
+import Icon_heart from '../../assets/images/Icon_heart.svg'
+import Icon_Link from '../../assets/images/Icon_link.svg'
 import OtherPosts from '../../Components/OtherPosts';
+import Icon_person from '../../assets/images/Icon_person-outline.svg';
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
@@ -27,6 +30,7 @@ interface PostType {
     title : string;
     transaction_region : string;
     updated_date : string;
+    member_info : any;
 }
 function GoodsDetail(){
     const query = useQuery();
@@ -48,12 +52,12 @@ function GoodsDetail(){
                         {thisPageInfo?.purpose === 'DONATION' ? <S.Donation>무료나눔</S.Donation> : <S.Price>{thisPageInfo?.price}<p>원</p></S.Price>}
                         <S.Line/>
                         <S.HeartCount>
-                            <p>{thisPageInfo?.get_likes}</p>
+                            <S.Icon><img src={Icon_heart} alt="" /></S.Icon><p>{thisPageInfo?.get_likes}</p>
                         </S.HeartCount>
                         <S.OpenChattingLink>
-                            <a href={thisPageInfo?.open_chat_link}>{thisPageInfo?.open_chat_link}</a>
+                            <S.Icon><img src={Icon_Link} alt="" /></S.Icon><a href={thisPageInfo?.open_chat_link}>{thisPageInfo?.open_chat_link}</a>
                         </S.OpenChattingLink>
-                        <S.Writer><p>{thisPageInfo?.member_name}</p></S.Writer>
+                        <S.Writer><p><S.Icon><img src={Icon_person} alt="" /></S.Icon>{thisPageInfo?.member_info.member_name}</p></S.Writer>
                         <S.RemoveButton>
                             <button>삭제</button>
                         </S.RemoveButton>
@@ -70,15 +74,15 @@ function GoodsDetail(){
                         </S.IntroduceContent>
                         <S.Profile>
                             <S.ProfileTop>
-                                <img src={thisPageInfo?.member_profile || DefaultProfile}/>
+                                <img src={thisPageInfo?.member_info.member_profile || DefaultProfile}/>
                                 <S.UserDetails>
-                                    <p>{thisPageInfo?.member_name}</p>
+                                    <p>{thisPageInfo?.member_info.member_name}</p>
                                     <S.UserActive>
                                         <S.ProductCount>
-                                            상품 {thisPageInfo?.posts_count}
+                                            상품 {thisPageInfo?.member_info.posts_count}
                                         </S.ProductCount>
                                         <S.WishCountt>
-                                            찜 {thisPageInfo?.every_like_counts}
+                                            찜 {thisPageInfo?.member_info.every_like_counts}
                                         </S.WishCountt>
                                     </S.UserActive>
                                         <S.VisitProfile>

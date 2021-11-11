@@ -69,6 +69,8 @@ export const HeartCount = styled.div`
 `
 export const OpenChattingLink = styled(HeartCount)`
     margin-top: 35px;
+    display: flex;
+    align-items: center;
     a{
         text-decoration: none;
         color: black;
@@ -76,6 +78,8 @@ export const OpenChattingLink = styled(HeartCount)`
 `
 export const Writer = styled(HeartCount)`
     margin-top:28px;
+    display: flex;
+    align-items: center;
 `
 export const RemoveButton = styled.div`
     display: flex;
@@ -156,4 +160,7 @@ export const VisitProfile = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`
+export const Icon = styled.i`
+    margin-right: 12px;
 `
