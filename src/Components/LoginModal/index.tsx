@@ -6,11 +6,11 @@ import axios from 'axios';
 import { API_HOST } from '../../constant/api';
 import {setModalOff} from '../../modules/redux/action/modal';
 import { useDispatch } from 'react-redux';
-import {setLogin} from '../../modules/redux/action/auth'
+import {setLogin,setAccessToken} from '../../modules/redux/action/auth'
 
 interface PropsType {
 }
-function LoginModal(props:PropsType){
+function LoginModal(){
     const dispatch = useDispatch();
     const ModalOff = () => dispatch(setModalOff());
     const history = useHistory();
@@ -29,11 +29,14 @@ function LoginModal(props:PropsType){
         axios.post(API_HOST + '/auth/login',{
             username,
             password
-        }).then(()=> {
+        }).then((res)=> {
             alert('로그인에 성공하였습니다.');
             history.push('/');
             dispatch(setLogin())
             dispatch(setModalOff())
+            dispatch(setAccessToken(res.data.access_token))
+            localStorage.setItem("access_token",res.data.access_token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
         })
     }
     return(
