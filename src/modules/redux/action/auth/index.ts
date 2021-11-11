@@ -1,9 +1,25 @@
 import { ACCESS_TOKEN,IS_LOGIN } from "./interface";
-import { createAction } from 'typesafe-actions'
 
-export const setAccessToken = createAction(ACCESS_TOKEN)<string>();
-export const setIsLogin = createAction(IS_LOGIN)<boolean>();
+export const setLogin = () => ({
+    type : IS_LOGIN
+})
 
-export {ACCESS_TOKEN, IS_LOGIN};
+type authActionType =  ReturnType<typeof setLogin>
 
-export type authActionType = ReturnType<typeof setAccessToken> | ReturnType<typeof setIsLogin>
+type isLoginState = {
+    isLogin : boolean;
+}
+
+const initState:isLoginState = {
+    isLogin : false
+}
+
+function setIsLogin(state : isLoginState = initState,action : authActionType):isLoginState{
+    switch (action.type){
+        case IS_LOGIN:
+            return {isLogin : !state.isLogin}
+        default:
+            return state
+    }
+}
+export default setIsLogin;

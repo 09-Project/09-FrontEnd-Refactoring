@@ -1,8 +1,30 @@
 import { MODAL_ON,MODAL_OFF } from "./interface";
-import { createAction } from "typesafe-actions";
 
-export const setModalOn = createAction(MODAL_ON)<string>();
-export const setModalOff = createAction(MODAL_OFF)<string>();
+export const setModalOn = () => ({
+    type : MODAL_ON
+})
+export const setModalOff = () => ({
+    type : MODAL_OFF
+})
 
-export {MODAL_ON,MODAL_OFF};
-export type modalActionType = ReturnType<typeof setModalOff> | ReturnType<typeof setModalOn>;
+type modalActionType = ReturnType<typeof setModalOn> | ReturnType<typeof setModalOff>
+
+type modalState = {
+    modal : boolean
+}
+
+const initState:modalState = {
+    modal : false
+}
+
+function setModal(state: modalState=initState,action:modalActionType):modalState{
+    switch (action.type){
+        case MODAL_ON:
+            return {modal : true}
+        case MODAL_OFF:
+            return {modal : false}
+        default:
+            return state
+    }
+}
+export default setModal
