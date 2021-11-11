@@ -4,7 +4,7 @@ import { RootState } from '../../modules/redux';
 import { setChangePassword,setSignUpPage } from '../../modules/redux/action/signup';
 import SignUp from '../../Pages/signup';
 
-const page = useSelector((state:RootState) => state.setPage.page);
+const page = useSelector((state:RootState) => state.setpage.page);
 const dispatch = useDispatch();
 
 const onSetChangePassword = () => {
