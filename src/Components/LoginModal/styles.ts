@@ -88,7 +88,7 @@ export const ButtonWrapper = styled.div`
 export const Button = styled.button`
     border: none;
     outline: none;
-    width: 48%;
+    width: 172px;
     height: 100%;
     font-family: "Noto Sans CJK KR";
     font-size: 20px;
