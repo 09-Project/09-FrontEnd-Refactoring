@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { RootState } from '../../modules/redux';
-import {setModalOn,setModalOff} from '../../modules/redux/action/modal'
+import {setModalOn} from '../../modules/redux/action/modal'
+import {setLogin} from '../../modules/redux/action/auth'
 
 type PropsType = {
     loginStatus : boolean;
@@ -33,7 +34,10 @@ const HeaderTop = () => {
     const isLogin = useSelector((state:RootState)=>state.setIsLogin.isLogin);
     const dispatch = useDispatch()
     const ModalOn = () => dispatch(setModalOn())
-    
-    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p onClick={()=>ModalOn()}>로그인</p><div>/</div><Link to="/signup"><p>회원가입</p></Link></LoginStatusDiv>}</HeaderTopWrapper>
+    const SetLogin = () => dispatch(setLogin())
+    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p onClick={()=>{
+        SetLogin();
+        localStorage.removeItem("access_token");
+    }}>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p onClick={()=>ModalOn()}>로그인</p><div>/</div><Link to="/signup"><p>회원가입</p></Link></LoginStatusDiv>}</HeaderTopWrapper>
 }
 export default HeaderTop;
