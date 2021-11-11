@@ -1,11 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { RootState } from '../../modules/redux';
+import {setModalOn,setModalOff} from '../../modules/redux/action/modal'
 
 type PropsType = {
-    isLogin : boolean;
-    setLogin : (e:boolean) => void;
+    loginStatus : boolean;
+    setLoginStatus : (e:boolean) => void;
 }
 const HeaderTopWrapper = styled.section`
     width: 1150px;
@@ -23,12 +25,15 @@ const LoginStatusDiv = styled.section`
     }
     > p {
         :hover{
-            color: blue;
         }
     }
 `
 
-const HeaderTop = ({isLogin,setLogin}:PropsType) => {
-    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p onClick={()=>setLogin(true)}>로그인</p><div>/</div><Link to="/signup"><p>회원가입</p></Link></LoginStatusDiv>}</HeaderTopWrapper>
+const HeaderTop = () => {
+    const isLogin = useSelector((state:RootState)=>state.setIsLogin.isLogin);
+    const dispatch = useDispatch()
+    const ModalOn = () => dispatch(setModalOn())
+    
+    return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p>로그아웃</p></LoginStatusDiv> : <LoginStatusDiv><p onClick={()=>ModalOn()}>로그인</p><div>/</div><Link to="/signup"><p>회원가입</p></Link></LoginStatusDiv>}</HeaderTopWrapper>
 }
 export default HeaderTop;
