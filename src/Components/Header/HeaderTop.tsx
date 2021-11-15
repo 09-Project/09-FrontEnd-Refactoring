@@ -6,10 +6,6 @@ import { RootState } from '../../modules/redux';
 import {setModalOn} from '../../modules/redux/action/modal'
 import {setLogin} from '../../modules/redux/action/auth'
 
-type PropsType = {
-    loginStatus : boolean;
-    setLoginStatus : (e:boolean) => void;
-}
 const HeaderTopWrapper = styled.section`
     width: 1150px;
     height: 44px;

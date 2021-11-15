@@ -15,7 +15,7 @@ const HeaderNav = () => {
                 </S.NavA>
             </Link>
             <S.Line/>
-            <Link to="/profile">
+            <Link to="/profile?type=my_page">
                 <S.NavA>
                     <li>
                         <i><FontAwesomeIcon icon={faUserAlt}/></i>
@@ -24,12 +24,14 @@ const HeaderNav = () => {
                 </S.NavA>
             </Link>
             <S.Line/>
-            <S.NavA>
-                <li>
-                    <i><FontAwesomeIcon icon={faHeart}/></i>
-                    <p>찜한 상품</p>
-                </li>
-            </S.NavA>
+            <Link to="/profile?type=wish">
+                <S.NavA>
+                    <li>
+                        <i><FontAwesomeIcon icon={faHeart}/></i>
+                        <p>찜한 상품</p>
+                    </li>
+                </S.NavA>
+            </Link>
         </S.NavWrapper>
     )
 }
