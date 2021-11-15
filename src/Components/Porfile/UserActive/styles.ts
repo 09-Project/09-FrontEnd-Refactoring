@@ -8,6 +8,7 @@ export const UserActiveWrapper = styled.section`
     margin-top: 98px;
     width: 100%;
     display: flex;
+    flex-direction: column;
 `
 
 export const ActiveTypes = styled.section`
@@ -36,6 +37,7 @@ export const SelectedType = styled.div`
     left: 0;
 `
 export const GoodsList = styled.div`
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     padding-top: 35px;
