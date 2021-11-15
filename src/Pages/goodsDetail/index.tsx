@@ -6,7 +6,7 @@ import axios from 'axios';
 import DefaultProfile from '../../assets/images/defaultProfile.svg'
 import Icon_heart from '../../assets/images/Icon_heart.svg'
 import Icon_Link from '../../assets/images/Icon_link.svg'
-import OtherPosts from '../../Components/OtherPosts';
+import OtherPosts from '../../Components/OtherPost';
 import Icon_person from '../../assets/images/Icon_person-outline.svg';
 function useQuery() {
     return new URLSearchParams(useLocation().search);
