@@ -2,12 +2,13 @@ import React, { ChangeEvent, useState } from 'react';
 import * as S from './styles';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { Link,useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { API_HOST } from '../../constant/api';
 import {setModalOff} from '../../modules/redux/action/modal';
 import { useDispatch } from 'react-redux';
-import {setLogin,setAccessToken} from '../../modules/redux/action/auth'
-
+import {setLogin,setAccessToken} from '../../modules/redux/action/auth';
+import { JWT_EXPIRE_TIME } from '../../constant/jwt_expiri_time';
+import {onLoginSuccess,onSilentRefresh} from '../../functions/refreshToken'
 interface PropsType {
 }
 function LoginModal(){
@@ -30,15 +31,21 @@ function LoginModal(){
             username,
             password
         }).then((res)=> {
+            localStorage.setItem("access_token",res.data.access_token);
+            localStorage.setItem("refresh_token",res.data.refresh_token);
+            onLoginSuccess(res)
             alert('로그인에 성공하였습니다.');
-            history.push('/');
             dispatch(setLogin())
             dispatch(setModalOff())
             dispatch(setAccessToken(res.data.access_token))
-            localStorage.setItem("access_token",res.data.access_token);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
+            setTimeout(onSilentRefresh, JWT_EXPIRE_TIME-7000);
+            history.push('/')
+        })
+        .then(()=>{
+            console.log('기본1 : '+axios.defaults.headers.common['Authorization'])
         })
     }
+    
     return(
         <S.LoginModalWrapper>
                 <OutsideClickHandler
