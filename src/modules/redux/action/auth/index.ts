@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { ACCESS_TOKEN,IS_LOGIN } from "./interface";
 
 export const setLogin = () => ({
@@ -8,16 +9,17 @@ export const setAccessToken = (token:string) => ({
     payload : token
 })
 
-type authActionType =  ReturnType<typeof setLogin> | ReturnType<typeof setAccessToken>
+type authActionType =  ReturnType<typeof setLogin> | ReturnType<typeof setAccessToken> 
 
 type isLoginState = {
     isLogin : boolean;
     accessToken : string;
+    
 }
 
 const initState:isLoginState = {
     isLogin : localStorage.getItem("access_token") ? true : false,
-    accessToken : ''
+    accessToken : '',
 }
 
 function setIsLogin(state : isLoginState = initState,action : authActionType):isLoginState{
