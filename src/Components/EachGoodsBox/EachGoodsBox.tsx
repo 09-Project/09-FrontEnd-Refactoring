@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './styles';
 import Location from '../../assets/images/location.gif'
 import { Link } from 'react-router-dom';
+import Heart from '../../assets/images/Icon_heart.svg'
+import HeartBlack from '../../assets/images/Icon_black_heart.svg'
+import axios from 'axios';
+import { API_HOST } from '../../constant/api';
 interface PropsType {
-    item : any;
+    item: any;
 }
-const EachGoodsBox = (props:PropsType) => {
-    return(
+const EachGoodsBox = (props: PropsType) => {
+    const onClickHeart = () => {
+        if (!props.item.liked) {
+            axios.post(API_HOST + '/like/' + props.item.id)
+        } else {
+            axios.delete(API_HOST + '/like/' + props.item.id)
+        }
+    }
+    return (
         <S.GoodsBoxWrapper>
-            <Link to={'/product?post_id='+props.item.id}>
+            <Link to={'/product?post_id=' + props.item.id}>
                 <S.GoodsLink>
                     <S.GoodsImgDiv>
                         <S.GoodsImg img={props.item.image} />
                     </S.GoodsImgDiv>
-                    <S.GoodsInfo>
+                    <S.GoodsInfo marginTop={props.item.purpose === "DONATION" ? 11 : 0}>
                         <p>{props.item.title}</p>
                         <div>
                             <div>
@@ -28,9 +39,12 @@ const EachGoodsBox = (props:PropsType) => {
             </Link>
             <S.Location>
                 <i>
-                    <img src={Location} alt="" />
+                    <img src={Location} style={{ width: '12px' }} alt="" />
                 </i>
                 <div>{props.item.transaction_region}</div>
+                <i style={{ marginLeft: 'auto', marginRight: '10px' }}>
+                    <img id={props.item.liked ? 'true' : 'false'} src={props.item.liked ? Heart : HeartBlack} alt="" onClick={onClickHeart} />
+                </i>
             </S.Location>
         </S.GoodsBoxWrapper>
     )

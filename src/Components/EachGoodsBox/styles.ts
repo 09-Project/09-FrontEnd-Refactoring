@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Default from '../../assets/images/defaultProfile.svg'
 interface PorpsType {
-    img? : any
+    img?: any
+    marginTop?: number;
 }
 
 export const GoodsBoxWrapper = styled.div`
@@ -32,7 +33,7 @@ export const GoodsImg = styled.div`
     font-size: 30px;
     font-family: "Noto Sans CJK KR";
     font-weight: bold;
-    background-image: url(${(props:PorpsType)=>props.img || Default});
+    background-image: url(${(props: PorpsType) => props.img || Default});
     background-repeat: no-repeat;
     background-size: cover;
 `
@@ -40,6 +41,7 @@ export const GoodsInfo = styled.section`
     width: 100%;
     border-bottom: 1px solid #707070;
     position: relative;
+    margin-top: ${(props: PorpsType) => props.marginTop || 0}px;
     > p {
         margin: 0;
         padding: 11px 0 0 16px;
@@ -110,7 +112,7 @@ export const Location = styled.section`
     padding: 5px 0;
     background-color: white;
     > i {
-        width : 12px;
+        /* width : 12px; */
         height:16px;
         margin: 0 0 0 10px;
         display: flex;
