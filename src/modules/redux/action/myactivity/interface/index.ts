@@ -1,0 +1,1 @@
+export const WISH = 'myactivity/WISH' as const;

@@ -19,7 +19,7 @@ type isLoginState = {
 }
 
 const initState: isLoginState = {
-    isLogin: localStorage.getItem("access_token") ? true : false,
+    isLogin: localStorage.getItem("login") ? true : false,
     accessToken: '',
 }
 
