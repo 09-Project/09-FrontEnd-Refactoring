@@ -11,6 +11,13 @@ export const Title = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
+    display: flex;
+    > p {
+        font-size: 40px;
+        color: rgb(74, 85, 181);
+        font-weight: bold;
+        margin-right: 10px;
+    }
 `
 
 export const ListBox = styled.div`
@@ -50,4 +57,4 @@ export const ChangePageBtns = styled.div`
     margin: 100px auto 0 auto;
     display: flex;
     justify-content: space-between;
-` 
+`
