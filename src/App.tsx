@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules/redux';
 import axios from 'axios';
 import { API_HOST } from './constant/api';
-
+import SearchPage from './Pages/search';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,9 +24,11 @@ const App: React.FC = () => {
     })
       .then(() => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+        localStorage.setItem('login', 'true');
       })
       .catch(() => {
         localStorage.removeItem("access_token");
+        localStorage.removeItem('login')
       });
   }, [localStorage.getItem("access_token")])
 
@@ -64,6 +66,7 @@ const App: React.FC = () => {
         <Route path="/profile" component={Profile} />
         <Route path="/signup" component={SignUp} />
         <Route path="/product" component={GoodsDetail} />
+        <Route path="/search" component={SearchPage} />
       </Switch>
     </BrowserRouter>
   );
