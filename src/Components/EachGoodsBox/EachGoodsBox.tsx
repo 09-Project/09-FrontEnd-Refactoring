@@ -8,15 +8,9 @@ import axios from 'axios';
 import { API_HOST } from '../../constant/api';
 interface PropsType {
     item: any;
+    onClickHeart: (item: any) => void
 }
 const EachGoodsBox = (props: PropsType) => {
-    const onClickHeart = () => {
-        if (!props.item.liked) {
-            axios.post(API_HOST + '/like/' + props.item.id)
-        } else {
-            axios.delete(API_HOST + '/like/' + props.item.id)
-        }
-    }
     return (
         <S.GoodsBoxWrapper>
             <Link to={'/product?post_id=' + props.item.id}>
@@ -43,7 +37,7 @@ const EachGoodsBox = (props: PropsType) => {
                 </i>
                 <div>{props.item.transaction_region}</div>
                 <i style={{ marginLeft: 'auto', marginRight: '10px' }}>
-                    <img id={props.item.liked ? 'true' : 'false'} src={props.item.liked ? Heart : HeartBlack} alt="" onClick={onClickHeart} />
+                    <img id={props.item.liked ? 'true' : 'false'} src={props.item.liked ? Heart : HeartBlack} alt="" onClick={() => props.onClickHeart(props.item)} />
                 </i>
             </S.Location>
         </S.GoodsBoxWrapper>
