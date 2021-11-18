@@ -32,13 +32,13 @@ const GoodsListBox = (props: PageInfoType) => {
         if (e === 'preve') setStartPageIndex(Math.max(startPageIndex - 1, 1));
         else setStartPageIndex(Math.min(startPageIndex + 1, pagenationLast));
     }
-    const onClickHeart = (item: any) => {
-        if (!item.liked) {
-            axios.post(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
-        } else {
-            axios.delete(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
-        }
-    }
+    // const onClickHeart = (item: any) => {
+    //     if (!item.liked) {
+    //         axios.post(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
+    //     } else {
+    //         axios.delete(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
+    //     }
+    // }
     useEffect(() => {
         const login = localStorage.getItem('access_token')
         if (login && !keyword) {
@@ -72,7 +72,7 @@ const GoodsListBox = (props: PageInfoType) => {
             }
             <S.ListBox>
                 {thisPageList.map((item, index) => {
-                    return <EachGoodsBox item={item} onClickHeart={onClickHeart} />
+                    return <EachGoodsBox item={item} />
                 })}
             </S.ListBox>
             <S.ChangePageBtns>
