@@ -6,11 +6,22 @@ import Heart from '../../assets/images/Icon_heart.svg'
 import HeartBlack from '../../assets/images/Icon_black_heart.svg'
 import axios from 'axios';
 import { API_HOST } from '../../constant/api';
+import { useDispatch } from 'react-redux';
+import { setWish } from '../../modules/redux/action/myactivity';
+
 interface PropsType {
     item: any;
-    onClickHeart: (item: any) => void
+    // onClickHeart: (item: any) => void
 }
 const EachGoodsBox = (props: PropsType) => {
+    const dispatch = useDispatch()
+    const onClickHeart = (item: any) => {
+        if (!item.liked) {
+            axios.post(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
+        } else {
+            axios.delete(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
+        }
+    }
     return (
         <S.GoodsBoxWrapper>
             <Link to={'/product?post_id=' + props.item.id}>
@@ -37,7 +48,7 @@ const EachGoodsBox = (props: PropsType) => {
                 </i>
                 <div>{props.item.transaction_region}</div>
                 <i style={{ marginLeft: 'auto', marginRight: '10px' }}>
-                    <img id={props.item.liked ? 'true' : 'false'} src={props.item.liked ? Heart : HeartBlack} alt="" onClick={() => props.onClickHeart(props.item)} />
+                    <img id={props.item.liked ? 'true' : 'false'} src={props.item.liked ? Heart : HeartBlack} alt="" onClick={() => onClickHeart(props.item)} />
                 </i>
             </S.Location>
         </S.GoodsBoxWrapper>
