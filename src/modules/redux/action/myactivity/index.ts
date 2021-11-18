@@ -7,9 +7,8 @@ const wishList = (): any => (
     axios.get(API_HOST + '/member/like', {
         headers: { Authorization: `Bearer ${localStorage.getItem('access_token')} ` }
     }).then(res => {
-        console.log(initState)
-        console.log(res.data)
-        return (res.data)
+        console.log(initState.wishes)
+        return res.data
     })
 )
 
