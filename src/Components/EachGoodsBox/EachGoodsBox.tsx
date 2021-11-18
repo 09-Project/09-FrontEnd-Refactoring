@@ -11,6 +11,7 @@ import { setWish } from '../../modules/redux/action/myactivity';
 
 interface PropsType {
     item: any;
+    type?: string;
     // onClickHeart: (item: any) => void
 }
 const EachGoodsBox = (props: PropsType) => {
@@ -23,20 +24,20 @@ const EachGoodsBox = (props: PropsType) => {
         }
     }
     return (
-        <S.GoodsBoxWrapper>
+        <S.GoodsBoxWrapper type={props.type}>
             <Link to={'/product?post_id=' + props.item.id}>
                 <S.GoodsLink>
-                    <S.GoodsImgDiv>
+                    <S.GoodsImgDiv type={props.type}>
                         <S.GoodsImg img={props.item.image} />
                     </S.GoodsImgDiv>
-                    <S.GoodsInfo marginTop={props.item.purpose === "DONATION" ? 11 : 0}>
+                    <S.GoodsInfo marginTop={props.item.purpose === "DONATION" ? 11 : 0} type={props.type}>
                         <p>{props.item.title}</p>
                         <div>
                             <div>
                                 {props.item.purpose === "DONATION" ? <S.Donation>무료나눔</S.Donation> : <div><S.Price>{props.item.price}</S.Price><S.Won>원</S.Won></div>}
                             </div>
                         </div>
-                        <S.PostType>
+                        <S.PostType type={props.type}>
                             <p>{props.item.purpose === "DONATION" ? '기부' : '공동구매'}</p>
                         </S.PostType>
                     </S.GoodsInfo>
