@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { API_HOST } from '../../constant/api';
 import * as S from './styles'
 import { useLocation } from 'react-router';
@@ -8,49 +8,50 @@ import Icon_heart from '../../assets/images/Icon_heart.svg'
 import Icon_Link from '../../assets/images/Icon_link.svg'
 import OtherPosts from '../../Components/OtherPost';
 import Icon_person from '../../assets/images/Icon_person-outline.svg';
+import { Link } from 'react-router-dom';
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 interface PostType {
-    image : string;
-    completed : string;
-    content : string;
-    created_date : string;
-    every_like_counts : number;
-    get_likes : number;
-    liked : boolean;
-    member_id : number;
-    member_introduction? : string;
-    member_name : string;
-    member_profile? : string;
-    open_chat_link : string;
-    posts_count : number;
-    price? : number;
-    purpose : string;
-    title : string;
-    transaction_region : string;
-    updated_date : string;
-    member_info : any;
+    image: string;
+    completed: string;
+    content: string;
+    created_date: string;
+    every_like_counts: number;
+    get_likes: number;
+    liked: boolean;
+    member_id: number;
+    member_introduction?: string;
+    member_name: string;
+    member_profile?: string;
+    open_chat_link: string;
+    posts_count: number;
+    price?: number;
+    purpose: string;
+    title: string;
+    transaction_region: string;
+    updated_date: string;
+    member_info: any;
 }
-function GoodsDetail(){
+function GoodsDetail() {
     const query = useQuery();
     const location = useLocation();
     const post_id = query.get('post_id');
-    const [thisPageInfo,setThisPageInfo] = useState<PostType>()
-    useEffect(()=>{
-        axios.get(API_HOST+'/post/'+post_id).then(res=>setThisPageInfo(res.data));
-    },[location.search]);
-    return(
+    const [thisPageInfo, setThisPageInfo] = useState<PostType>()
+    useEffect(() => {
+        axios.get(API_HOST + '/post/' + post_id).then(res => setThisPageInfo(res.data));
+    }, [location.search]);
+    return (
         <S.goodsDetailWrapper>
             <S.Introduce>
                 <S.SimpleInfo>
                     <a href={thisPageInfo?.image}>
-                        <S.Img img={thisPageInfo?.image}/>
+                        <S.Img img={thisPageInfo?.image} />
                     </a>
                     <S.Details>
                         <S.GoodsTitle>{thisPageInfo?.title}</S.GoodsTitle>
                         {thisPageInfo?.purpose === 'DONATION' ? <S.Donation>무료나눔</S.Donation> : <S.Price>{thisPageInfo?.price}<p>원</p></S.Price>}
-                        <S.Line/>
+                        <S.Line />
                         <S.HeartCount>
                             <S.Icon><img src={Icon_heart} alt="" /></S.Icon><p>{thisPageInfo?.get_likes}</p>
                         </S.HeartCount>
@@ -74,7 +75,7 @@ function GoodsDetail(){
                         </S.IntroduceContent>
                         <S.Profile>
                             <S.ProfileTop>
-                                <img src={thisPageInfo?.member_info.member_profile || DefaultProfile}/>
+                                <img src={thisPageInfo?.member_info.member_profile || DefaultProfile} />
                                 <S.UserDetails>
                                     <p>{thisPageInfo?.member_info.member_name}</p>
                                     <S.UserActive>
@@ -85,16 +86,18 @@ function GoodsDetail(){
                                             찜 {thisPageInfo?.member_info.every_like_counts}
                                         </S.WishCountt>
                                     </S.UserActive>
+                                    <Link to={`/profile?type=ing&id=${thisPageInfo?.member_info.member_id}`}>
                                         <S.VisitProfile>
                                             페이지 방문
                                         </S.VisitProfile>
+                                    </Link>
                                 </S.UserDetails>
                             </S.ProfileTop>
                         </S.Profile>
                     </S.IntroduceWrapper>
                 </S.DetailInfo>
             </S.Introduce>
-            <OtherPosts/>
+            <OtherPosts />
         </S.goodsDetailWrapper>
     )
 }
