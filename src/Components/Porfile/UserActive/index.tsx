@@ -1,27 +1,47 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { API_HOST } from '../../../constant/api';
+import { RootState } from '../../../modules/redux';
 import EachGoodsBox from '../../EachGoodsBox/EachGoodsBox';
 import * as S from './styles';
-function UserActive({ userInfo }: any) {
+
+interface PropsType {
+    userInfo: any
+    type: string | null
+    isMyPage: boolean
+}
+
+function UserActive({ userInfo, type, isMyPage }: PropsType) {
     const ING = 'ing';
     const WISH = 'wish';
     const PAST = 'past';
-    const [selectedType, setSelectedType] = useState(ING);
     const onClickChangeType = (e: any) => {
         setSelectedType(e.target.id);
     }
-    const [activities, setActivities] = useState([])
+    const [selectedType, setSelectedType] = useState(type);
+    const [activities, setActivities] = useState<any[]>([])
+    const WishList = useSelector((state: RootState) => state.setActivity.wishes)
     useEffect(() => {
         const userId = userInfo.member_id;
         console.log(userId)
         if (selectedType === ING) {
             axios.get(`${API_HOST}/member/in-progress/${userId}`).then((res) => {
-                // setActivities(res.data)
+                setActivities(res.data)
+            })
+        } else if (selectedType === WISH) {
+            axios.get(`${API_HOST}/member/like`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('access_token')} ` }
+            }).then(res => {
+                setActivities(res.data)
+                console.log(res.data)
+            })
+        } else if (selectedType === PAST) {
+            axios.get(`${API_HOST}/member/completed/${userId}`).then((res) => {
+                setActivities(res.data)
             })
         }
-    }, [selectedType, userInfo])
-    const [isMyPage, setIsMyPage] = useState(true);
+    }, [selectedType, userInfo, WishList])
     return (
         <S.UserActiveWrapper>
             <S.ActiveTypes>
@@ -32,7 +52,9 @@ function UserActive({ userInfo }: any) {
                 </S.TypeWrapper>
             </S.ActiveTypes>
             <S.GoodsList>
-                {activities}
+                {activities.map((item, index) =>
+                    <EachGoodsBox item={item} />
+                )}
             </S.GoodsList>
         </S.UserActiveWrapper>
     )

@@ -3,7 +3,12 @@ import * as S from './styles';
 import { RootState } from '../../../modules/redux';
 import { useSelector } from 'react-redux';
 
-function UserInfo({ userInfo }: any) {
+interface PropsType {
+    userInfo: any
+    isMyPage: boolean
+}
+
+function UserInfo({ userInfo, isMyPage }: PropsType) {
     console.log(userInfo)
     return (
         <S.UserInfoWrapper>
@@ -18,9 +23,13 @@ function UserInfo({ userInfo }: any) {
                 <S.UserIntroduce>
                     {userInfo.introduction}
                 </S.UserIntroduce>
-                <S.EditProfile>
-                    <p>프로필 수정</p>
-                </S.EditProfile>
+                {isMyPage ?
+                    <S.EditProfile>
+                        <p>프로필 수정</p>
+                    </S.EditProfile>
+                    :
+                    ''
+                }
             </S.UserInfo>
         </S.UserInfoWrapper>
     )

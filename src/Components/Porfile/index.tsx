@@ -22,31 +22,30 @@ interface userInfoType {
 function Profile() {
     const query = useQuery();
     const type = query.get("type");
-    const [userInfo, setUserInfo] = useState<userInfoType>({
-        // member_id: 0,
-        // name: '',
-        // profile_url: '',
-        // introduction: '',
-        // all_posts_count: 0,
-        // get_likes_count: 0,
-        // in_progress_posts_count: 0,
-        // completed_posts_count: 0,
-        // like_posts_count: 0
-    })
+    const page = query.get('page')
+    const id = query.get('id');
+    console.log(id)
+    console.log(type)
+    const [isMyPage, setIsMyPage] = useState(page === 'my_page');
+    const [userInfo, setUserInfo] = useState<userInfoType>({})
     useEffect(() => {
-        axios.get(API_HOST + '/member/my-page', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
-        })
-            .then((res) => {
-                setUserInfo(res.data)
-                console.log(res)
+        if (isMyPage) {
+            axios.get(API_HOST + '/member/my-page', {
+                headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
             })
+                .then((res) => {
+                    setUserInfo(res.data)
+                    console.log(res)
+                })
+        } else {
+            axios.get(`${API_HOST}/member/${id}`).then(res => setUserInfo(res.data))
+        }
     }, [])
     return (
         <S.ProfileWrapper>
             <S.Title>마이페이지</S.Title>
-            <UserInfo userInfo={userInfo} />
-            <UserActive userInfo={userInfo} />
+            <UserInfo userInfo={userInfo} isMyPage={isMyPage} />
+            <UserActive userInfo={userInfo} type={type} isMyPage={isMyPage} />
         </S.ProfileWrapper>
     )
 }
