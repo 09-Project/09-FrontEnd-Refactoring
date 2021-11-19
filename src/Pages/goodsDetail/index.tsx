@@ -8,7 +8,10 @@ import Icon_heart from '../../assets/images/Icon_heart.svg'
 import Icon_Link from '../../assets/images/Icon_link.svg'
 import OtherPosts from '../../Components/OtherPost';
 import Icon_person from '../../assets/images/Icon_person-outline.svg';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../modules/redux';
+
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
@@ -35,12 +38,28 @@ interface PostType {
 }
 function GoodsDetail() {
     const query = useQuery();
-    const location = useLocation();
     const post_id = query.get('post_id');
     const [thisPageInfo, setThisPageInfo] = useState<PostType>()
+    const memberName = useSelector((state: RootState) => state.setMember.info.name)
+    console.log(memberName)
+    console.log(thisPageInfo?.member_info.member_name)
+    const [isMine, setIsMine] = useState(memberName === thisPageInfo?.member_info.member_name)
     useEffect(() => {
-        axios.get(API_HOST + '/post/' + post_id).then(res => setThisPageInfo(res.data));
-    }, [location.search]);
+        axios.get(API_HOST + '/post/' + post_id).then(res => {
+            setThisPageInfo(res.data)
+        });
+    }, [post_id]);
+    const history = useHistory();
+    const onClickRemovePost = () => {
+        axios.delete(API_HOST + '/post/' + post_id).then(() => {
+            alert("삭제에 성공했습니다");
+            history.push('/');
+        })
+    }
+    useEffect(() => {
+        if (memberName === thisPageInfo?.member_info.member_name) setIsMine(true)
+        else setIsMine(false)
+    }, [thisPageInfo?.member_info.member_name])
     return (
         <S.goodsDetailWrapper>
             <S.Introduce>
@@ -59,9 +78,13 @@ function GoodsDetail() {
                             <S.Icon><img src={Icon_Link} alt="" /></S.Icon><a href={thisPageInfo?.open_chat_link}>{thisPageInfo?.open_chat_link}</a>
                         </S.OpenChattingLink>
                         <S.Writer><p><S.Icon><img src={Icon_person} alt="" /></S.Icon>{thisPageInfo?.member_info.member_name}</p></S.Writer>
-                        <S.RemoveButton>
-                            <button>삭제</button>
-                        </S.RemoveButton>
+                        {
+                            isMine ?
+                                <S.RemoveButton>
+                                    <button onClick={onClickRemovePost}>삭제</button>
+                                </S.RemoveButton>
+                                : ''
+                        }
                     </S.Details>
                 </S.SimpleInfo>
                 <S.DetailInfo>
