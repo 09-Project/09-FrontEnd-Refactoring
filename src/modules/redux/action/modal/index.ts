@@ -1,28 +1,28 @@
-import { MODAL_ON,MODAL_OFF } from "./interface";
+import { MODAL_ON, MODAL_OFF } from "./interface";
 
 export const setModalOn = () => ({
-    type : MODAL_ON
+    type: MODAL_ON
 })
 export const setModalOff = () => ({
-    type : MODAL_OFF
+    type: MODAL_OFF
 })
 
 type modalActionType = ReturnType<typeof setModalOn> | ReturnType<typeof setModalOff>
 
 type modalState = {
-    modal : boolean
+    modal: boolean
 }
 
-const initState:modalState = {
-    modal : false
+const initState: modalState = {
+    modal: false
 }
 
-function setModal(state: modalState=initState,action:modalActionType):modalState{
-    switch (action.type){
+function setModal(state: modalState = initState, action: modalActionType): modalState {
+    switch (action.type) {
         case MODAL_ON:
-            return {modal : true}
+            return { modal: true }
         case MODAL_OFF:
-            return {modal : false}
+            return { modal: false }
         default:
             return state
     }

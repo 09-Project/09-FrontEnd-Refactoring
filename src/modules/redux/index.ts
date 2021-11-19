@@ -3,12 +3,14 @@ import setPage from "./action/signup";
 import setIsLogin from "./action/auth";
 import setModal from "./action/modal";
 import setActivity from "./action/myactivity";
+import PageReducer from "./action/page";
 
 const rootReducer = combineReducers({
     setpage: setPage,
     setIsLogin: setIsLogin,
     setmodal: setModal,
-    setActivity: setActivity
+    setActivity: setActivity,
+    setPage: PageReducer
 });
 
 export default rootReducer
