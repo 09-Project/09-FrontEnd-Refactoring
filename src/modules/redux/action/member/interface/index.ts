@@ -1,0 +1,1 @@
+export const SET_MEMBER_INFO = 'member/SET_MEMBER_INFO' as const
