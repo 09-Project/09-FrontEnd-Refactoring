@@ -94,7 +94,7 @@ function UploadInput({ setUploadContent, uploadContent }: Props) {
             {inputArr.map((li, index) => (
                 uploadContent.type === 'donation' && li.title === '가격' ?
                     '' :
-                    < S.UploadInputWrapper >
+                    < S.UploadInputWrapper key={index} >
                         <S.InputWrapper>
                             <S.Title>{li.title}</S.Title>
                             <S.Input width={li.width} placeholder={li.placeholder} value={li.value} onChange={onChangeInputs} name={li.name} />

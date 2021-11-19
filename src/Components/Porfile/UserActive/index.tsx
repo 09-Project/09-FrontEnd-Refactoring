@@ -56,7 +56,7 @@ function UserActive({ userInfo, type, isMyPage }: PropsType) {
             </S.ActiveTypes>
             <S.GoodsList>
                 {activities.map((item, index) =>
-                    <EachGoodsBox item={item} type="small" />
+                    <EachGoodsBox key={index} item={item} type="small" />
                 )}
             </S.GoodsList>
         </S.UserActiveWrapper>

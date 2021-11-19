@@ -72,7 +72,7 @@ const GoodsListBox = (props: PageInfoType) => {
             }
             <S.ListBox>
                 {thisPageList.map((item, index) => {
-                    return <EachGoodsBox item={item} />
+                    return <EachGoodsBox key={index} item={item} />
                 })}
             </S.ListBox>
             <S.ChangePageBtns>
@@ -80,10 +80,10 @@ const GoodsListBox = (props: PageInfoType) => {
                 {Array(pagenation > 5 ? 5 : pagenation).fill(void 0).map((item, index) => {
                     const targetPage = startPageIndex + index;
                     if (targetPage === selectedPage) return (
-                        <S.ChangePageBtn onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.ChangePageBtn>
+                        <S.ChangePageBtn key={index} onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.ChangePageBtn>
                     )
                     return (
-                        <S.SelectBtn onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.SelectBtn>
+                        <S.SelectBtn key={index} onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.SelectBtn>
                     )
                 })}
                 <S.ArrowBtn onClick={() => onClickSetStartPage('next')}>{">"}</S.ArrowBtn>
