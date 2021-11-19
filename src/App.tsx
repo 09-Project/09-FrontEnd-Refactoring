@@ -6,14 +6,14 @@ import Upload from "./Pages/upload";
 import Profile from "./Components/Porfile";
 import LoginModal from "./Components/LoginModal";
 import SignUp from './Pages/signup';
-import { useLocation } from 'react-router-dom';
 import GoodsDetail from './Pages/goodsDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules/redux';
 import axios from 'axios';
 import { API_HOST } from './constant/api';
 import SearchPage from './Pages/search';
-
+import { useLocation } from "react-router";
+import Footer from './Components/footer';
 const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,11 +31,7 @@ const App: React.FC = () => {
         localStorage.removeItem('login')
       });
   }, [localStorage.getItem("access_token")])
-
-  // console.log('기본 : ' + axios.defaults.headers.common['Authorization'])
-  const [signup, setSignup] = useState(false);
   const Modalstatus = useSelector((state: RootState) => state.setmodal.modal);
-
   const axiosApiInstance = axios.create();
   axiosApiInstance.interceptors.request.use(
     async config => {
@@ -51,15 +47,17 @@ const App: React.FC = () => {
       Promise.reject(err);
     }
   )
+  const page = useSelector((state: RootState) => state.setPage.page)
   return (
     <BrowserRouter>
       {Modalstatus ?
         <LoginModal />
         : ''
       }
-      {signup ?
-        ''
-        : <Header />}
+      {page === '/signup' ?
+        '' :
+        <Header />
+      }
       <Switch>
         <Route exact path="/" component={MainPage} />
         <Route path="/upload" component={Upload} />
@@ -68,6 +66,7 @@ const App: React.FC = () => {
         <Route path="/product" component={GoodsDetail} />
         <Route path="/search" component={SearchPage} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }
