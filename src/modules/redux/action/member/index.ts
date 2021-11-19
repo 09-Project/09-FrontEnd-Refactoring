@@ -12,7 +12,7 @@ type memberState = {
 }
 
 const initState: memberState = {
-    info: ''
+    info: localStorage.getItem('memberName')
 }
 
 function MemberReducer(state: memberState = initState, action: MemberAction): memberState {
