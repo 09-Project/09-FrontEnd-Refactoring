@@ -20,6 +20,9 @@ function UserActive({ userInfo, type, isMyPage }: PropsType) {
         setSelectedType(e.target.id);
     }
     const [selectedType, setSelectedType] = useState(type);
+    useEffect(() => {
+        setSelectedType(type)
+    }, [type])
     const [activities, setActivities] = useState<any[]>([])
     const WishList = useSelector((state: RootState) => state.setActivity.wishes)
     useEffect(() => {
