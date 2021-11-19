@@ -1,14 +1,14 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderBottom from './HeaderBottom/HeaderBottom';
 import HeaderTop from './HeaderTop';
 import * as S from './styles';
 interface PropsType {
 }
-const Header = (props:PropsType) => {
-    return(
+const Header = (props: PropsType) => {
+    return (
         <S.HeaderWrapper>
-            <HeaderTop/>
-            <HeaderBottom/>
+            <HeaderTop />
+            <HeaderBottom />
         </S.HeaderWrapper>
     )
 }

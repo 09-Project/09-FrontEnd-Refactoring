@@ -24,7 +24,7 @@ const HeaderNav = () => {
                 </S.NavA>
             </Link>
             <S.Line />
-            <Link to="/profile?type=wish">
+            <Link to="/profile?page=my_page&type=wish">
                 <S.NavA>
                     <li>
                         <i><FontAwesomeIcon icon={faHeart} /></i>
