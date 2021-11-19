@@ -29,7 +29,7 @@ function Developers() {
             <div>
                 {
                     developers.map((item, index) =>
-                        <S.EachDeveloper>
+                        <S.EachDeveloper key={index}>
                             <S.DevelopType>{item.developType}</S.DevelopType>
                             <S.DeveloperName>{item.name}</S.DeveloperName>
                         </S.EachDeveloper>
