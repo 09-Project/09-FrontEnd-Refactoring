@@ -14,16 +14,20 @@ import { API_HOST } from './constant/api';
 import SearchPage from './Pages/search';
 import { useLocation } from "react-router";
 import Footer from './Components/footer';
+import { setMemberInfo } from './modules/redux/action/member';
 const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     console.log("access_token is changed")
     const access_token = localStorage.getItem("access_token");
+    const setMember = (info: any) => dispatch(setMemberInfo(info))
     axios.get(API_HOST + '/member/information', {
       headers: { Authorization: `Bearer ${access_token}` }
     })
-      .then(() => {
+      .then((res) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+        setMember(res.data)
+        localStorage.setItem('memberName', res.data.name)
         localStorage.setItem('login', 'true');
       })
       .catch(() => {
