@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MainPage from "./Pages/MainPage/MainPage";
 import Header from "./Components/Header/Header";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 import Upload from "./Pages/upload";
 import Profile from "./Components/Porfile";
 import LoginModal from "./Components/LoginModal";
@@ -15,6 +15,8 @@ import SearchPage from './Pages/search';
 import { useLocation } from "react-router";
 import Footer from './Components/footer';
 import { setMemberInfo } from './modules/redux/action/member';
+import ChangeProfile from './Pages/changeProfile';
+import { setLogin } from './modules/redux/action/auth';
 const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -33,6 +35,7 @@ const App: React.FC = () => {
       .catch(() => {
         localStorage.removeItem("access_token");
         localStorage.removeItem('login')
+        setLogin(false)
       });
   }, [localStorage.getItem("access_token")])
   const Modalstatus = useSelector((state: RootState) => state.setmodal.modal);
@@ -51,7 +54,7 @@ const App: React.FC = () => {
       Promise.reject(err);
     }
   )
-  const page = useSelector((state: RootState) => state.setPage.page)
+  const page = useSelector((state: RootState) => state.setPage.page);
   return (
     <BrowserRouter>
       {Modalstatus ?
@@ -69,6 +72,7 @@ const App: React.FC = () => {
         <Route path="/signup" component={SignUp} />
         <Route path="/product" component={GoodsDetail} />
         <Route path="/search" component={SearchPage} />
+        <Route path="/changeprofile" component={ChangeProfile} />
       </Switch>
       <Footer />
     </BrowserRouter>
