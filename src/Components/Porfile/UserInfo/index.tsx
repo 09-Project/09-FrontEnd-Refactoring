@@ -10,9 +10,10 @@ interface PropsType {
 }
 
 function UserInfo({ userInfo, isMyPage }: PropsType) {
+    console.log(userInfo.profile_url)
     return (
         <S.UserInfoWrapper>
-            <S.UserImg />
+            <S.UserImg img={userInfo.profile_url} />
             <S.UserInfo>
                 <S.UserName>{userInfo.name}</S.UserName>
                 <S.UserActive>

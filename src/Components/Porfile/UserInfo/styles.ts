@@ -1,13 +1,21 @@
 import styled from "styled-components";
+import Default from '../../../assets/images/defaultProfile.svg'
+interface StyleType {
+    img?: string
+}
 
 export const UserInfoWrapper = styled.div`
     margin: 60px 0 0 37px;
     display: flex;
     align-items: center;
 `
-export const UserImg = styled.img`
+export const UserImg = styled.div`
     width: 240px;
     height: 240px;
+    background-image: url(${(props: StyleType) => props.img || Default});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 `
 export const UserInfo = styled.section`
     margin-left: 32px;
