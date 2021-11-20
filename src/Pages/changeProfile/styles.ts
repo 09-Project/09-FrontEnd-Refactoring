@@ -27,18 +27,28 @@ export const ChangeImg = styled.div`
     width: 240px;
     display: flex;
     flex-direction: column;
-    > button {
+    > label{
+        margin-top: 24px;
+        color: white;
+        display: flex;
+        font-size: 20px;
+        font-weight: bold;
         width: 100%;
         height: 50px;
         background-color: #4a55b5;
-        color: white;
-        display: flex;
         align-items: center;
         justify-content: center;
         border: none;
-        font-size: 20px;
-        font-weight: bold;
-        margin-top: 24px;
+        > input {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
     }
 `
 export const Profile = styled.div`
@@ -96,4 +106,16 @@ export const SubmitButton = styled.button`
     align-items: center;
     font-size: 20px;
     font-weight: bold;
+`
+export const ChangePassword = styled.div`
+    margin: 24px 0 0 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4a55b5;
+    background-color: white;
+    width: 126px;
+    height: 35px;
+    font-size: 14px;
+    color: #4a55b5;
 `

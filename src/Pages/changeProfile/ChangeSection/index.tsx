@@ -1,20 +1,25 @@
 import React, { useState, ChangeEvent } from 'react';
 import * as S from '../styles';
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../modules/redux';
-function ChangeSection() {
+interface PropsType {
+    inputs: {
+        nickName: string,
+        selfIntroduction: string,
+        profileUrl: string
+    }
+    setInputs: (e: any) => void
+    limit: {
+        nickNameLimit: number,
+        selfIntroductionLimit: number
+    }
+}
+function ChangeSection({ inputs, setInputs, limit }: PropsType) {
     const name = useSelector((state: RootState) => state.setMember.info.name);
     const introduction = useSelector((state: RootState) => state.setMember.info.introduction);
     const profile = useSelector((state: RootState) => state.setMember.info.profile_url);
-    const [inputs, setInputs] = useState({
-        nickName: '',
-        selfIntroduction: ''
-    })
-    const { nickName, selfIntroduction } = inputs
-    const limit = {
-        nickNameLimit: 10,
-        selfIntroductionLimit: 200
-    }
+    const { nickName, selfIntroduction, profileUrl } = inputs
     console.log(inputs)
     const onChangeProfile = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -26,11 +31,19 @@ function ChangeSection() {
             })
         }
     }
+    const onChangeProfileImg = (e: ChangeEvent<HTMLInputElement>) => {
+        const fileList = e.target.files;
+        if (!fileList) return;
+        setInputs({
+            ...inputs,
+            profileUrl: fileList[0]
+        })
+    }
     return (
         <S.ChangeSection>
             <S.ChangeImg>
                 <S.Profile img={profile} />
-                <button>이미지 변경</button>
+                <label><input type="file" onChange={onChangeProfileImg} />이미지 변경</label>
             </S.ChangeImg>
             <S.Inputs>
                 <S.EachInput marginBottom={50} heigth={44}>
@@ -43,6 +56,11 @@ function ChangeSection() {
                     <textarea placeholder={introduction} name="selfIntroduction" value={selfIntroduction} onChange={onChangeProfile} />
                     <div>({selfIntroduction.length}/{200})</div>
                 </S.EachInput>
+                <Link to="/">
+                    <S.ChangePassword>
+                        비밀번호 변경
+                    </S.ChangePassword>
+                </Link>
             </S.Inputs>
         </S.ChangeSection>
     )
