@@ -26,7 +26,7 @@ function LoginModal() {
             [e.target.name]: e.target.value
         })
     }
-    const onClickSubmutLogin = () => {
+    const onClickSubmitLogin = () => {
         axios.post(API_HOST + '/auth/login', {
             username,
             password
@@ -69,7 +69,7 @@ function LoginModal() {
                         <p>아이디 저장</p>
                     </S.SaveID>
                     <S.ButtonWrapper>
-                        <S.Button color='white' backGroundColor="#4a55b5" onClick={onClickSubmutLogin}>LOGIN</S.Button>
+                        <S.Button color='white' backGroundColor="#4a55b5" onClick={onClickSubmitLogin}>LOGIN</S.Button>
                         <Link to="/signup"><S.Button>JOIN US</S.Button></Link>
                     </S.ButtonWrapper>
                 </S.Modal>
