@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import * as S from './styles';
 import { RootState } from '../../../modules/redux';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 interface PropsType {
     userInfo: any
@@ -9,7 +10,6 @@ interface PropsType {
 }
 
 function UserInfo({ userInfo, isMyPage }: PropsType) {
-    console.log(userInfo)
     return (
         <S.UserInfoWrapper>
             <S.UserImg />
@@ -25,7 +25,9 @@ function UserInfo({ userInfo, isMyPage }: PropsType) {
                 </S.UserIntroduce>
                 {isMyPage ?
                     <S.EditProfile>
-                        <p>프로필 수정</p>
+                        <Link to="/changeProfile">
+                            <p>프로필 수정</p>
+                        </Link>
                     </S.EditProfile>
                     :
                     ''

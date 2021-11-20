@@ -45,7 +45,7 @@ export const EditProfile = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    > p {
+    > a > p {
         color: white;
         font-family: "Noto Sans CJK KR";
         font-weight: bold;

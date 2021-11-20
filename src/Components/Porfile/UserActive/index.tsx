@@ -27,7 +27,6 @@ function UserActive({ userInfo, type, isMyPage }: PropsType) {
     const WishList = useSelector((state: RootState) => state.setActivity.wishes)
     useEffect(() => {
         const userId = userInfo.member_id;
-        console.log(userId)
         if (selectedType === ING) {
             axios.get(`${API_HOST}/member/in-progress/${userId}`).then((res) => {
                 setActivities(res.data)
@@ -37,7 +36,6 @@ function UserActive({ userInfo, type, isMyPage }: PropsType) {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access_token')} ` }
             }).then(res => {
                 setActivities(res.data)
-                console.log(res.data)
             })
         } else if (selectedType === PAST) {
             axios.get(`${API_HOST}/member/completed/${userId}`).then((res) => {

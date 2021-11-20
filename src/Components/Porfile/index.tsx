@@ -24,8 +24,6 @@ function Profile() {
     const type = query.get("type");
     const page = query.get('page')
     const id = query.get('id');
-    console.log(id)
-    console.log(type)
     const [isMyPage, setIsMyPage] = useState(page === 'my_page');
     const [userInfo, setUserInfo] = useState<userInfoType>({})
     useEffect(() => {
@@ -35,7 +33,6 @@ function Profile() {
             })
                 .then((res) => {
                     setUserInfo(res.data)
-                    console.log(res)
                 })
         } else {
             axios.get(`${API_HOST}/member/${id}`).then(res => setUserInfo(res.data))
