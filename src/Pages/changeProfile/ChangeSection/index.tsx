@@ -56,7 +56,7 @@ function ChangeSection({ inputs, setInputs, limit }: PropsType) {
                     <textarea placeholder={introduction} name="selfIntroduction" value={selfIntroduction} onChange={onChangeProfile} />
                     <div>({selfIntroduction.length}/{200})</div>
                 </S.EachInput>
-                <Link to="/">
+                <Link to="/signup?type=changepassword">
                     <S.ChangePassword>
                         비밀번호 변경
                     </S.ChangePassword>
