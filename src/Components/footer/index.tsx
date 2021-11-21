@@ -16,7 +16,7 @@ function Footer() {
     const history = useHistory()
     console.log(page)
     useEffect(() => {
-        if (isLogin === false && (page !== '' && page !== '/' && page !== '/search' && page !== '/product' && page !== '/profile')) {
+        if (isLogin === false && (page !== '' && page !== '/' && page !== '/search' && page !== '/product' && page !== '/signup')) {
             history.push('/')
             alert('로그인이 필요합니다!')
         }
@@ -26,8 +26,13 @@ function Footer() {
     }, [location.pathname])
     return (
         <S.FooterWrapper>
-            <Developers />
-            <Project09 />
+            {location.pathname === '/signup' ?
+                '' :
+                <>
+                    <Developers />
+                    <Project09 />
+                </>
+            }
         </S.FooterWrapper>
     )
 }

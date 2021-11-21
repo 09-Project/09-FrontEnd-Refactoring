@@ -2,6 +2,7 @@ import React from 'react'
 import * as S from '../styles';
 import Logo from '../../../assets/images/symbol_black.png'
 
+
 function Project09() {
     return (
         <S.ProjectInfoWrapper>
