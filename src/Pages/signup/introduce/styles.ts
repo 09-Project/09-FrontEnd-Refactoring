@@ -15,6 +15,18 @@ export const TitleWrapper = styled.div`
     font-weight: bold;
     border-bottom: 1px solid #707070;
 `
+export const PasswordTitle = styled.h1`
+    display: flex;
+    align-items: center;
+    padding-left: 37px;
+    width: 100%;
+    height: 150px;
+    margin: auto;
+    font-size: 40px;
+    font-family: "Noto Sans CJK KR";
+    font-weight: bold;
+    border-bottom: 1px solid #707070;
+`
 export const Introduce = styled.div`
     padding-left: 22px;
     height: 100px;

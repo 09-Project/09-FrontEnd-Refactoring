@@ -3,9 +3,10 @@ import * as S from './styles';
 interface PropsType {
     signUpContent: any;
     onChangeSignUpContent: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    pagetype: string | null
 }
-function Inputs({ signUpContent, onChangeSignUpContent }: PropsType) {
-    const InputArr = [
+function Inputs({ signUpContent, onChangeSignUpContent, pagetype }: PropsType) {
+    const signupInputArr = [
         {
             title: '닉네임',
             eyes: false,
@@ -36,9 +37,32 @@ function Inputs({ signUpContent, onChangeSignUpContent }: PropsType) {
             onChange: onChangeSignUpContent
         }
     ]
+    const changePassword = [
+        {
+            title: '기존 비밀번호',
+            eyes: false,
+            name: 'beforePassword',
+            value: signUpContent.beforePassword,
+            onChange: onChangeSignUpContent
+        },
+        {
+            title: '새 비밀번호',
+            eyes: true,
+            name: 'newPassword',
+            value: signUpContent.newPassword,
+            onChange: onChangeSignUpContent
+        },
+        {
+            title: '새 비밀번호 확인',
+            eyes: true,
+            name: 'newPasswordCheck',
+            value: signUpContent.newPasswordCheck,
+            onChange: onChangeSignUpContent
+        }
+    ]
     return (
         <S.InputsWrapper>
-            {InputArr.map((item, index) =>
+            {(pagetype === 'changepassword' ? changePassword : signupInputArr).map((item, index) =>
                 <S.InputDiv key={index}>
                     <p>{item.title}</p>
                     <S.InputLabel>

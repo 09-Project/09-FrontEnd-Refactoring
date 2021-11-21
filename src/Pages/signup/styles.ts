@@ -7,7 +7,7 @@ export const SignUpWrapper = styled.section`
     align-items: center;
 `
 export const SignUpContents = styled.div`
-    width: 1300px;
+    width: 1150px;
     margin: 0 auto;
 `
 export const SignUpBody = styled.div`
