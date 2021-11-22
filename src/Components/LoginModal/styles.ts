@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 interface StylesProps {
-    color? : string;
-    backGroundColor? : string;
-} 
+    color?: string;
+    backGroundColor?: string;
+}
 export const LoginModalWrapper = styled.section`
     position: fixed;
     background-color: rgba(0, 0, 0, 0.35);
@@ -23,8 +23,8 @@ export const Modal = styled.div`
 `
 
 export const CloseImg = styled.img`
-    width: 11px;
-    height: 11px;
+    width: 15px;
+    height: 15px;
     margin-left: auto;
     margin-right: 28.6px;
     padding-top: 25.5px;
@@ -96,7 +96,7 @@ export const Button = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${(props:StylesProps)=>props.color || 'black'};
+    color: ${(props: StylesProps) => props.color || 'black'};
     text-decoration: none;
-    background-color: ${(props:StylesProps)=>props.backGroundColor || '#ffffff'};
+    background-color: ${(props: StylesProps) => props.backGroundColor || '#ffffff'};
 `

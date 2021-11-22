@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import * as S from './styles';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { Link, useHistory } from 'react-router-dom';
@@ -9,6 +9,10 @@ import { useDispatch } from 'react-redux';
 import { setLogin, setAccessToken } from '../../modules/redux/action/auth';
 import { JWT_EXPIRE_TIME } from '../../constant/jwt_expiri_time';
 import { onLoginSuccess, onSilentRefresh } from '../../functions/refreshToken'
+import symbol from '../../assets/images/Symbol.png'
+import close from '../../assets/images/close.svg'
+import visibleEye from '../../assets/images/visibleEye.svg'
+import normalEye from '../../assets/images/normalEye.svg'
 interface PropsType {
 }
 function LoginModal() {
@@ -16,8 +20,8 @@ function LoginModal() {
     const ModalOff = () => dispatch(setModalOff());
     const history = useHistory();
     const [loginContent, setLoginContent] = useState({
-        username: '',
-        password: ''
+        username: localStorage.getItem('savedId') ? localStorage.getItem('savedId') : '',
+        password: localStorage.getItem('savedPassword') ? localStorage.getItem('savedPassword') : ''
     })
     const { username, password } = loginContent;
     const onChangeLoginContent = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +46,22 @@ function LoginModal() {
             history.push('/')
         })
     }
-
+    const [save, setSave] = useState(localStorage.getItem('saveBtn'))
+    const onChangeSavePassword = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) setSave(true)
+        else setSave(false)
+    }
+    useEffect(() => {
+        if (save) {
+            localStorage.setItem('savedId', username);
+            localStorage.setItem('savedPassword', password);
+            localStorage.setItem('saveBtn', save)
+        } else {
+            localStorage.removeItem('savedId');
+            localStorage.removeItem('savedPassword')
+            localStorage.removeItem('saveBtn')
+        }
+    }, [username, password, save])
     return (
         <S.LoginModalWrapper>
             <OutsideClickHandler
@@ -51,8 +70,8 @@ function LoginModal() {
                 }}
             >
                 <S.Modal>
-                    <S.CloseImg />
-                    <S.Logo />
+                    <S.CloseImg onClick={() => ModalOff()} src={close} />
+                    <S.Logo src={symbol} />
                     <S.ModalTitle>공동구매부터 무료나눔까지</S.ModalTitle>
                     <S.Login>LOG IN</S.Login>
                     <S.InputWrapper>
@@ -62,7 +81,7 @@ function LoginModal() {
                         <S.Input placeholder="PASSWORD" name="password" value={password} onChange={onChangeLoginContent} />
                     </S.InputWrapper>
                     <S.SaveID>
-                        <S.Checkbox type="checkbox" />
+                        <S.Checkbox type="checkbox" onChange={onChangeSavePassword} checked={save ? 'checked' : ''} />
                         <p>아이디 저장</p>
                     </S.SaveID>
                     <S.ButtonWrapper>
