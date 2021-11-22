@@ -35,9 +35,6 @@ export const onSilentRefresh = () => {
         headers: { 'x-refresh-token': `${refresh}` }
     })
         .then(onLoginSuccess)
-        .catch((e) => {
-            console.log(e);
-        })
 }
 
 export const onLoginSuccess = (res: AxiosResponse<any, any>) => {

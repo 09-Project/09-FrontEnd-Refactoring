@@ -20,10 +20,8 @@ function ChangeSection({ inputs, setInputs, limit }: PropsType) {
     const introduction = useSelector((state: RootState) => state.setMember.info.introduction);
     const profile = useSelector((state: RootState) => state.setMember.info.profile_url);
     const { nickName, selfIntroduction, profileUrl } = inputs
-    console.log(inputs)
     const onChangeProfile = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        console.log(name)
         if (name === 'nickName' && value.length <= limit.nickNameLimit || name === 'selfIntroduction' && value.length <= limit.selfIntroductionLimit) {
             setInputs({
                 ...inputs,

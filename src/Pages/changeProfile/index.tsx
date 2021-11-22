@@ -21,7 +21,6 @@ function ChangeProfile() {
         form.append('introduction', inputs.selfIntroduction)
         form.append('profileUrl', inputs.profileUrl);
         axios.patch(API_HOST + '/member/information', form).then(() => {
-            console.log('success')
             alert("프로필 변경에 성공했습니다!")
             history.push('/')
         })

@@ -41,9 +41,6 @@ function LoginModal() {
             setTimeout(onSilentRefresh, JWT_EXPIRE_TIME - 7000);
             history.push('/')
         })
-            .then(() => {
-                console.log('기본1 : ' + axios.defaults.headers.common['Authorization'])
-            })
     }
 
     return (

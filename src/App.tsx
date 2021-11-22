@@ -20,7 +20,6 @@ import { setLogin } from './modules/redux/action/auth';
 const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("access_token is changed")
     const access_token = localStorage.getItem("access_token");
     const setMember = (info: any) => dispatch(setMemberInfo(info))
     axios.get(API_HOST + '/member/information', {
@@ -42,7 +41,6 @@ const App: React.FC = () => {
   const axiosApiInstance = axios.create();
   axiosApiInstance.interceptors.request.use(
     async config => {
-      console.log('start')
       const accessToken = localStorage.getItem("access_token")
       config.headers = {
         'Authorization': `Bearer ${accessToken}`,

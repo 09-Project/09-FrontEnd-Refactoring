@@ -29,9 +29,6 @@ function Profile() {
     const [userInfo, setUserInfo] = useState<userInfoType>({})
     const memberName = useSelector((state: RootState) => state.setMember.info.name)
     const [isMyPage, setIsMyPage] = useState(memberName === userInfo.name || page === 'my_page');
-    console.log(isMyPage)
-    console.log(userInfo.name)
-    console.log(memberName)
     useEffect(() => {
         if (isMyPage) {
             axios.get(API_HOST + '/member/my-page', {

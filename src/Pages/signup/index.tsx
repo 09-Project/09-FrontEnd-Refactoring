@@ -42,7 +42,6 @@ function SignUp({
             [e.target.name]: e.target.value
         })
     }
-    console.log(type)
     const onClickSubmitSignUp = () => {
         if (type !== 'changepassword') {
             if (password === checkpassword) {
