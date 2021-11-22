@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import Default from '../../assets/images/defaultProfile.svg'
 interface PropsType {
     marginBottom?: number
     heigth?: number
@@ -55,7 +55,7 @@ export const Profile = styled.div`
     width: 100%;
     height: 240px;
     /* border: 1px solid black; */
-    background-image : url(${(props: PropsType) => props.img});
+    background-image : url(${(props: PropsType) => props.img || Default});
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
