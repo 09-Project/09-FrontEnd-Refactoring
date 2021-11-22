@@ -41,8 +41,6 @@ function GoodsDetail() {
     const post_id = query.get('post_id');
     const [thisPageInfo, setThisPageInfo] = useState<PostType>()
     const memberName = useSelector((state: RootState) => state.setMember.info.name)
-    console.log(memberName)
-    console.log(thisPageInfo?.member_info.member_name)
     const [isMine, setIsMine] = useState(memberName === thisPageInfo?.member_info.member_name)
     useEffect(() => {
         axios.get(API_HOST + '/post/' + post_id).then(res => {

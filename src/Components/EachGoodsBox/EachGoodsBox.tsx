@@ -23,7 +23,6 @@ const EachGoodsBox = (props: PropsType) => {
             axios.delete(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
         }
     }
-    console.log(props.item)
     return (
         <S.GoodsBoxWrapper type={props.type}>
             <Link to={'/product?post_id=' + props.item.id}>
