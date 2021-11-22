@@ -88,6 +88,7 @@ export const RemoveImgButton = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    background-image: url(${(props: StyleProps) => props.img});
 `
 export const ImgBox = styled.div`
     width: 240px;

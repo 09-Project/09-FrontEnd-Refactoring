@@ -3,7 +3,7 @@ import React, { ChangeEvent, ChangeEventHandler, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { API_HOST } from '../../../constant/api';
 import * as S from './styles';
-
+import DefaultGoodsImg from '../../../assets/images/defaultGoods.png'
 interface ArrayType {
     title: string;
     width?: number;
@@ -75,6 +75,8 @@ function UploadInput({ setUploadContent, uploadContent }: Props) {
         }).then(() => {
             alert('게시글 작성을 성공하였습니다!');
             history.push('/')
+        }).catch(() => {
+            alert('다시 확인하고 시도해주세요!')
         })
     }
     return (

@@ -3,6 +3,7 @@ import * as S from './styles';
 import Radio from './UploadTypeRadio';
 import UploadImg from './UploadImg';
 import UploadInput from './UploadInputs';
+import DefaultGoodsImg from '../../assets/images/defaultGoods.png'
 interface UploadType {
     title: string
     content: string

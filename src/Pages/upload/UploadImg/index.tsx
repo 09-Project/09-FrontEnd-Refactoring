@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import * as S from '../styles';
+import removeIcon from '../../../assets/images/removeImg.svg'
+import XIcon from '../../../assets/images/Xicon.svg';
 interface Props {
     setUploadContent: (e: any) => void;
     uploadContent: any
@@ -30,7 +32,7 @@ function UploadImg({ setUploadContent, uploadContent }: Props) {
             </S.ImgCount>
             <S.Imgs>
                 <S.ImgBox>
-                    <S.RemoveImgButton onClick={onClickRemoveImg}>X</S.RemoveImgButton>
+                    {fileUrl !== null ? <S.RemoveImgButton onClick={onClickRemoveImg} img={removeIcon}><img src={XIcon} /></S.RemoveImgButton> : ''}
                     <S.InputImg img={fileUrl}>
                         <input type="file" name="uploadImg" id="" onChange={onChangeUploadImg} multiple={false} />
                     </S.InputImg>
