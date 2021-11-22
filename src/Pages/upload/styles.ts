@@ -1,6 +1,8 @@
+import { statSync } from "fs";
 import styled from "styled-components";
-
+import Default from '../../assets/images/defaultGoods.png'
 interface StyleProps {
+    img?: any;
 }
 
 export const UploadPageWrapper = styled.section`
@@ -75,15 +77,36 @@ export const Imgs = styled.div`
         margin-left: 16px;
     }
 `
-export const InputImg = styled.label`
+export const RemoveImgButton = styled.div`
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+`
+export const ImgBox = styled.div`
     width: 240px;
     height: 240px;
-    background-color: #9a9a9a;
+    position: relative;
+    margin: 0 16px;
+`
+export const InputImg = styled.label`
+    background-image: url(${(props: StyleProps) => props.img || Default});
+    /* background-color: #9a9a9a; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 16px;
+    width: 100%;
+    height: 100%;
     >input{
         position: absolute;
         width: 1px;
