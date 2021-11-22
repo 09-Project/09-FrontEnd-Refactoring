@@ -7,6 +7,7 @@ import EachGoodsBox from '../EachGoodsBox/EachGoodsBox';
 import * as S from './style';
 import { useLocation } from 'react-router';
 import { setWish } from '../../modules/redux/action/myactivity';
+import Empty from './empty';
 
 interface PageInfoType {
     type?: string
@@ -62,33 +63,41 @@ const GoodsListBox = (props: PageInfoType) => {
         }
     }, [selectedPage, isLogin, keyword, wishList])
     return (
-        <S.GoodsListBoxWrapper>
-            {props.type === 'search' ?
-                <S.Title>
-                    <p>"{keyword}"</p>
-                    검색결과
-                </S.Title> :
-                <S.Title>추천 상품</S.Title>
+        <div>
+            {
+                (thisPageList.length < 1 && keyword !== null) ? <Empty /> :
+                    < S.GoodsListBoxWrapper >
+                        {
+                            props.type === 'search' ?
+                                <S.Title>
+                                    <p>"{keyword}"</p>
+                                    검색결과
+                                </S.Title> :
+                                <S.Title>추천 상품</S.Title>
+                        }
+                        < S.ListBox >
+                            {
+                                thisPageList.map((item, index) => {
+                                    return <EachGoodsBox key={index} item={item} />
+                                })
+                            }
+                        </S.ListBox >
+                        <S.ChangePageBtns>
+                            <S.ArrowBtn onClick={() => onClickSetStartPage('preve')}>{"<"}</S.ArrowBtn>
+                            {Array(pagenation > 5 ? 5 : pagenation).fill(void 0).map((item, index) => {
+                                const targetPage = startPageIndex + index;
+                                if (targetPage === selectedPage) return (
+                                    <S.ChangePageBtn key={index} onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.ChangePageBtn>
+                                )
+                                return (
+                                    <S.SelectBtn key={index} onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.SelectBtn>
+                                )
+                            })}
+                            <S.ArrowBtn onClick={() => onClickSetStartPage('next')}>{">"}</S.ArrowBtn>
+                        </S.ChangePageBtns>
+                    </S.GoodsListBoxWrapper >
             }
-            <S.ListBox>
-                {thisPageList.map((item, index) => {
-                    return <EachGoodsBox key={index} item={item} />
-                })}
-            </S.ListBox>
-            <S.ChangePageBtns>
-                <S.ArrowBtn onClick={() => onClickSetStartPage('preve')}>{"<"}</S.ArrowBtn>
-                {Array(pagenation > 5 ? 5 : pagenation).fill(void 0).map((item, index) => {
-                    const targetPage = startPageIndex + index;
-                    if (targetPage === selectedPage) return (
-                        <S.ChangePageBtn key={index} onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.ChangePageBtn>
-                    )
-                    return (
-                        <S.SelectBtn key={index} onClick={() => onClickSelectBtn(targetPage)}>{targetPage}</S.SelectBtn>
-                    )
-                })}
-                <S.ArrowBtn onClick={() => onClickSetStartPage('next')}>{">"}</S.ArrowBtn>
-            </S.ChangePageBtns>
-        </S.GoodsListBoxWrapper>
+        </div>
     )
 }
 export default GoodsListBox;
