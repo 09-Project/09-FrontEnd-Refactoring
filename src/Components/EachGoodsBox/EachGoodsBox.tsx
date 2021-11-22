@@ -23,12 +23,17 @@ const EachGoodsBox = (props: PropsType) => {
             axios.delete(API_HOST + '/like/' + item.id).then(() => { dispatch(setWish()) })
         }
     }
+    console.log(props.item)
     return (
         <S.GoodsBoxWrapper type={props.type}>
             <Link to={'/product?post_id=' + props.item.id}>
                 <S.GoodsLink>
                     <S.GoodsImgDiv type={props.type}>
                         <S.GoodsImg img={props.item.image} />
+                        {props.item.completed === "COMPLETED" ?
+                            <S.Finish>종료</S.Finish>
+                            : ''
+                        }
                     </S.GoodsImgDiv>
                     <S.GoodsInfo marginTop={props.item.purpose === "DONATION" ? 11 : 0} type={props.type}>
                         <p>{props.item.title}</p>

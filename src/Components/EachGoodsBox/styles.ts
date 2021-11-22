@@ -41,6 +41,18 @@ export const GoodsImg = styled.div`
     background-size: contain;
     background-position: center;
 `
+export const Finish = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+`
 export const GoodsInfo = styled.section`
     width: 100%;
     border-bottom: 1px solid #707070;
