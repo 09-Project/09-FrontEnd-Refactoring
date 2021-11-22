@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Default from '../../assets/images/defaultProfile.svg';
 import DefaultGoods from '../../assets/images/defaultGoods.png'
 interface StyleProps {
-    img? : string;
-    marginLeft? : number;
+    img?: string;
+    marginLeft?: number;
 }
 
 export const goodsDetailWrapper = styled.section`
@@ -19,7 +19,7 @@ export const SimpleInfo = styled.div`
     display: flex;
 `
 export const Img = styled.div`
-    background-image: url(${(props:StyleProps)=>props.img || DefaultGoods});
+    background-image: url(${(props: StyleProps) => props.img || DefaultGoods});
     width: 400px;
     height: 400px;
     background-position: center;
@@ -81,19 +81,29 @@ export const Writer = styled(HeartCount)`
     display: flex;
     align-items: center;
 `
-export const RemoveButton = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 5px;
-    button {
-        width: 120px;
-        height: 40px;
-        border: 2px solid #4a55b5;
-        color: #4a55b5;
-        font-size: 18px;
-        font-weight: bold;
-        background-color: white;
-    }
+export const Buttons = styled.div`
+    
+margin-top: 5px;
+margin-left: auto;
+`
+export const FinishButton = styled.button`
+    width: 120px;
+    height: 40px;
+    border: 2px solid #4a55b5;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4a55b5;
+    margin-right: 20px;
+`
+export const RemoveButton = styled.button`
+    width: 120px;
+    height: 40px;
+    border: 2px solid #4a55b5;
+    color: #4a55b5;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
 `
 export const DetailInfo = styled.div`
     margin-top : 80px;
@@ -104,7 +114,7 @@ export const IntroduceType = styled.div`
     border-bottom: 1px solid #707070;
 `
 export const Type = styled.p`
-    margin-left: ${(props:StyleProps)=>props.marginLeft || '37'}px;
+    margin-left: ${(props: StyleProps) => props.marginLeft || '37'}px;
 `
 export const Contents = styled.div`
     display: flex;

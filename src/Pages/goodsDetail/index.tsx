@@ -50,6 +50,12 @@ function GoodsDetail() {
         });
     }, [post_id]);
     const history = useHistory();
+    const onClickFinishPost = () => {
+        axios.put(API_HOST + '/post/' + post_id).then(() => {
+            alert('거래 종료를 성공적으로 완료했습니다!')
+            history.push('/')
+        })
+    }
     const onClickRemovePost = () => {
         axios.delete(API_HOST + '/post/' + post_id).then(() => {
             alert("삭제에 성공했습니다");
@@ -80,9 +86,14 @@ function GoodsDetail() {
                         <S.Writer><p><S.Icon><img src={Icon_person} alt="" /></S.Icon>{thisPageInfo?.member_info.member_name}</p></S.Writer>
                         {
                             isMine ?
-                                <S.RemoveButton>
-                                    <button onClick={onClickRemovePost}>삭제</button>
-                                </S.RemoveButton>
+                                <S.Buttons>
+                                    <S.FinishButton onClick={onClickFinishPost}>
+                                        완료
+                                    </S.FinishButton>
+                                    <S.RemoveButton onClick={onClickRemovePost}>
+                                        삭제
+                                    </S.RemoveButton>
+                                </S.Buttons>
                                 : ''
                         }
                     </S.Details>
