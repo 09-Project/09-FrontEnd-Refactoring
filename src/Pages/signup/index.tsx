@@ -14,6 +14,23 @@ interface SignUpProps {
     onSetChangePassword: () => void;
     onSetSignUpPage: () => void;
 }
+type varName =
+    'name'
+    | 'username'
+    | 'password'
+    | 'checkpassword'
+    | 'beforePassword'
+    | 'newPassword'
+    | 'newPasswordCheck'
+interface VisibleType {
+    name: boolean
+    username: boolean
+    password: boolean
+    checkpassword: boolean
+    beforePassword: boolean
+    newPassword: boolean
+    newPasswordCheck: boolean
+}
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
@@ -24,6 +41,21 @@ function SignUp({
 }: SignUpProps) {
     const history = useHistory();
     const location = useLocation();
+    const [visible, setVisible] = useState<VisibleType>({
+        name: false,
+        username: false,
+        password: false,
+        checkpassword: false,
+        beforePassword: false,
+        newPassword: false,
+        newPasswordCheck: false
+    })
+    const onToggleEyes = (name: varName) => {
+        setVisible({
+            ...visible,
+            [name]: !visible[name],
+        })
+    }
     const [signUpContent, setSignUpContent] = useState({
         name: '',
         username: '',
@@ -74,7 +106,7 @@ function SignUp({
                 <Logo />
                 <Introduce pagetype={type} />
                 <S.SignUpBody>
-                    <Inputs pagetype={type} signUpContent={signUpContent} onChangeSignUpContent={onChangeSignUpContent} />
+                    <Inputs pagetype={type} signUpContent={signUpContent} onChangeSignUpContent={onChangeSignUpContent} onToggleEyes={onToggleEyes} visible={visible} />
                     <Banner isLarge={false} img={Banner_09} />
                 </S.SignUpBody>
                 <S.Buttons>

@@ -6,7 +6,7 @@ interface PropsType {
 function Introduce({ pagetype }: PropsType) {
     return (
         <S.IntroduceWrapper>
-            {pagetype === 'changepassword' ?
+            {pagetype !== 'changepassword' ?
                 <S.TitleWrapper>
                     JOIN US
                 </S.TitleWrapper>

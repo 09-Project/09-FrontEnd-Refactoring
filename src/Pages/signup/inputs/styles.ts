@@ -28,4 +28,8 @@ export const InputLabel = styled.label`
         height: 100%;
         background-color: transparent;
     }
+    > label {
+        display: flex;
+        align-items: center;
+    }
 `
