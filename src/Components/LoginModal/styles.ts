@@ -54,6 +54,12 @@ export const InputWrapper = styled.label`
     border: 1px solid black;
     display: flex;
     margin: 35px auto 0 auto;
+    > i {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        width: 40px;
+    }
 `
 export const Input = styled.input`
     padding-left: 10px;

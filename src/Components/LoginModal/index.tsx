@@ -12,16 +12,18 @@ import { onLoginSuccess, onSilentRefresh } from '../../functions/refreshToken'
 import symbol from '../../assets/images/Symbol.png'
 import close from '../../assets/images/close.svg'
 import visibleEye from '../../assets/images/visibleEye.svg'
-import normalEye from '../../assets/images/normalEye.svg'
+import invisible from '../../assets/images/invisible.svg'
 interface PropsType {
+    username: string
+    password: string
 }
 function LoginModal() {
     const dispatch = useDispatch();
     const ModalOff = () => dispatch(setModalOff());
     const history = useHistory();
-    const [loginContent, setLoginContent] = useState({
-        username: localStorage.getItem('savedId') ? localStorage.getItem('savedId') : '',
-        password: localStorage.getItem('savedPassword') ? localStorage.getItem('savedPassword') : ''
+    const [loginContent, setLoginContent] = useState<PropsType>({
+        username: String(localStorage.getItem('savedId') ? localStorage.getItem('savedId') : ''),
+        password: String(localStorage.getItem('savedPassword') ? localStorage.getItem('savedPassword') : '')
     })
     const { username, password } = loginContent;
     const onChangeLoginContent = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +48,7 @@ function LoginModal() {
             history.push('/')
         })
     }
-    const [save, setSave] = useState(localStorage.getItem('saveBtn'))
+    const [save, setSave] = useState<boolean>(localStorage.getItem('saveBtn') ? true : false)
     const onChangeSavePassword = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked) setSave(true)
         else setSave(false)
@@ -55,13 +57,17 @@ function LoginModal() {
         if (save) {
             localStorage.setItem('savedId', username);
             localStorage.setItem('savedPassword', password);
-            localStorage.setItem('saveBtn', save)
+            localStorage.setItem('saveBtn', 'true')
         } else {
             localStorage.removeItem('savedId');
             localStorage.removeItem('savedPassword')
             localStorage.removeItem('saveBtn')
         }
     }, [username, password, save])
+    const [visible, setVisible] = useState(false)
+    const onClickEye = () => {
+        setVisible(!visible)
+    }
     return (
         <S.LoginModalWrapper>
             <OutsideClickHandler
@@ -78,10 +84,11 @@ function LoginModal() {
                         <S.Input placeholder="ID" name="username" value={username} onChange={onChangeLoginContent} />
                     </S.InputWrapper>
                     <S.InputWrapper>
-                        <S.Input placeholder="PASSWORD" name="password" value={password} onChange={onChangeLoginContent} />
+                        <S.Input type={visible ? 'text' : 'password'} placeholder="PASSWORD" name="password" value={password} onChange={onChangeLoginContent} />
+                        <i><img onClick={onClickEye} src={visible ? visibleEye : invisible} alt="" /></i>
                     </S.InputWrapper>
                     <S.SaveID>
-                        <S.Checkbox type="checkbox" onChange={onChangeSavePassword} checked={save ? 'checked' : ''} />
+                        <S.Checkbox type="checkbox" onChange={onChangeSavePassword} checked={save} />
                         <p>아이디 저장</p>
                     </S.SaveID>
                     <S.ButtonWrapper>
