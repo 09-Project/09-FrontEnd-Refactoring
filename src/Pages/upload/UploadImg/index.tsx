@@ -7,11 +7,11 @@ interface Props {
     uploadContent: any
 }
 function UploadImg({ setUploadContent, uploadContent }: Props) {
-    const [fileUrl, setFileUrl] = useState(null)
+    const [fileUrl, setFileUrl] = useState<any>(null)
     const onChangeUploadImg = (e: ChangeEvent<HTMLInputElement>) => {
         const fileList = e.target.files;
-        setFileUrl(URL.createObjectURL(fileList[0]));
         if (!fileList) return;
+        setFileUrl(URL.createObjectURL(fileList[0]));
         setUploadContent({
             ...uploadContent,
             image: fileList[0]
