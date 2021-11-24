@@ -16,7 +16,8 @@ import { useLocation } from "react-router";
 import Footer from './Components/footer';
 import { setMemberInfo } from './modules/redux/action/member';
 import ChangeProfile from './Pages/changeProfile';
-import { setLogin } from './modules/redux/action/auth';
+import { setAccessToken, setLogin } from './modules/redux/action/auth';
+import './functions/refreshToken'
 const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,24 +35,11 @@ const App: React.FC = () => {
       .catch(() => {
         localStorage.removeItem("access_token");
         localStorage.removeItem('login')
-        setLogin(false)
+        dispatch(setLogin(false))
       });
+    dispatch(setAccessToken(String(localStorage.getItem('access_token'))))
   }, [localStorage.getItem("access_token")])
   const Modalstatus = useSelector((state: RootState) => state.setmodal.modal);
-  const axiosApiInstance = axios.create();
-  axiosApiInstance.interceptors.request.use(
-    async config => {
-      const accessToken = localStorage.getItem("access_token")
-      config.headers = {
-        'Authorization': `Bearer ${accessToken}`,
-        'Accept': 'application/json',
-      }
-      return config;
-    },
-    err => {
-      Promise.reject(err);
-    }
-  )
   const page = useSelector((state: RootState) => state.setPage.page);
   return (
     <BrowserRouter>
