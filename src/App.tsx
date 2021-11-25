@@ -17,7 +17,7 @@ import Footer from './Components/footer';
 import { setMemberInfo } from './modules/redux/action/member';
 import ChangeProfile from './Pages/changeProfile';
 import { setAccessToken, setLogin } from './modules/redux/action/auth';
-import './functions/refreshToken'
+// import './functions/refreshToken'
 const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 interface Styles {
-    img : any;
-    isMain? : boolean;
-    margin? : number;
+    img: any;
+    isMain?: boolean;
+    margin?: number;
 }
 export const HeaderBottomWrapper = styled.section`
     width: 100%;
@@ -30,10 +30,10 @@ export const LogoNSymbol = styled.div`
     display: flex;
 `
 export const Logo = styled.div`
-    width: ${(props:Styles) => props.isMain ? '66' : '44'}px;
+    width: ${(props: Styles) => props.isMain ? '66' : '44'}px;
     height: 44px;
-    margin-right: ${(props:Styles)=>props.margin}px;
-    background-image: url(${(props:Styles)=>props.img});
+    margin-right: ${(props: Styles) => props.margin}px;
+    background-image: url(${(props: Styles) => props.img});
     background-repeat: no-repeat;
     background-size: contain;
 `
@@ -69,6 +69,10 @@ export const NavA = styled.a`
         display: flex;
         align-items: center;
         padding: 0 15px;
+        > i {
+            display: flex;
+            align-items: center;
+        }
         > p{
             margin-left: 8px;
             font-size: 14px;

@@ -44,7 +44,7 @@ function LoginModal() {
             dispatch(setLogin(true))
             dispatch(setModalOff())
             dispatch(setAccessToken(res.data.access_token))
-            setTimeout(onSilentRefresh, JWT_EXPIRE_TIME - 7000);
+            setTimeout(onSilentRefresh, JWT_EXPIRE_TIME - 60000);
             history.push('/')
         })
     }
