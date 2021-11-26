@@ -34,7 +34,7 @@ const EachGoodsBox = (props: PropsType) => {
                             : ''
                         }
                     </S.GoodsImgDiv>
-                    <S.GoodsInfo marginTop={props.item.purpose === "DONATION" ? 11 : 0} type={props.type}>
+                    <S.GoodsInfo marginTop={props.item.purpose === "DONATION" ? 0 : 0} type={props.type}>
                         <p>{props.item.title}</p>
                         <div>
                             <div>

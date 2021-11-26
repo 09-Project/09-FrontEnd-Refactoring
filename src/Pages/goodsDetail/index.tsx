@@ -5,12 +5,15 @@ import { useLocation } from 'react-router';
 import axios from 'axios';
 import DefaultProfile from '../../assets/images/defaultProfile.svg'
 import Icon_heart from '../../assets/images/Icon_heart.svg'
+import Icon_black_heart from '../../assets/images/Icon_black_heart.svg'
 import Icon_Link from '../../assets/images/Icon_link.svg'
 import OtherPosts from '../../Components/OtherPost';
 import Icon_person from '../../assets/images/Icon_person-outline.svg';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules/redux';
+import { useDispatch } from 'react-redux';
+import { setWish } from '../../modules/redux/action/myactivity';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -41,12 +44,13 @@ function GoodsDetail() {
     const post_id = query.get('post_id');
     const [thisPageInfo, setThisPageInfo] = useState<PostType>()
     const memberName = useSelector((state: RootState) => state.setMember.info.name)
+    const wishList = useSelector((state: RootState) => state.setActivity.wishes);
     const [isMine, setIsMine] = useState(memberName === thisPageInfo?.member_info.member_name)
     useEffect(() => {
         axios.get(API_HOST + '/post/' + post_id).then(res => {
             setThisPageInfo(res.data)
         });
-    }, [post_id]);
+    }, [post_id, wishList]);
     const history = useHistory();
     const onClickFinishPost = () => {
         axios.put(API_HOST + '/post/' + post_id).then(() => {
@@ -64,13 +68,26 @@ function GoodsDetail() {
         if (memberName === thisPageInfo?.member_info.member_name) setIsMine(true)
         else setIsMine(false)
     }, [thisPageInfo?.member_info.member_name])
+    const dispatch = useDispatch()
+    const onClickHeart = (item: any) => {
+        if (!item.liked) {
+            axios.post(API_HOST + '/like/' + post_id).then(() => { dispatch(setWish()) })
+        } else {
+            axios.delete(API_HOST + '/like/' + post_id).then(() => { dispatch(setWish()) })
+        }
+    }
     return (
         <S.goodsDetailWrapper>
             <S.Introduce>
                 <S.SimpleInfo>
-                    <a href={thisPageInfo?.image}>
-                        <S.Img img={thisPageInfo?.image} />
-                    </a>
+                    <S.ImgDiv>
+                        <S.Heart onClick={() => onClickHeart(thisPageInfo)}>
+                            <img src={thisPageInfo?.liked ? Icon_heart : Icon_black_heart} alt="" />
+                        </S.Heart>
+                        <a href={thisPageInfo?.image}>
+                            <S.Img img={thisPageInfo?.image} />
+                        </a>
+                    </S.ImgDiv>
                     <S.Details>
                         <S.GoodsTitle>{thisPageInfo?.title}</S.GoodsTitle>
                         {thisPageInfo?.purpose === 'DONATION' ? <S.Donation>무료나눔</S.Donation> : <S.Price>{thisPageInfo?.price}<p>원</p></S.Price>}

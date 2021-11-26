@@ -42,11 +42,11 @@ function SignUp({
     const history = useHistory();
     const location = useLocation();
     const [visible, setVisible] = useState<VisibleType>({
-        name: false,
-        username: false,
+        name: true,
+        username: true,
         password: false,
         checkpassword: false,
-        beforePassword: false,
+        beforePassword: true,
         newPassword: false,
         newPasswordCheck: false
     })

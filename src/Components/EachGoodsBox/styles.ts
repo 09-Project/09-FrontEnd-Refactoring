@@ -61,6 +61,10 @@ export const GoodsInfo = styled.section`
     > p {
         margin: 0;
         padding: 11px 0 0 16px;
+        width: 190px;
+        height: 40px;
+        display: flex;
+        align-items: center;
         /* padding: ${(props: PorpsType) => props.type === 'small' ? '5px 0 0 16px' : '11px 0 0 16px'}; */
         font-size: 18px;
         font-family: "Noto Sans CJK KR";
@@ -134,6 +138,9 @@ export const Location = styled.section`
     align-items: center;
     padding: 5px 0;
     background-color: white;
+    height: 50px;
+    /* height: 34px; */
+    overflow: hidden;
     > i {
         /* width : 12px; */
         height:16px;
@@ -147,5 +154,7 @@ export const Location = styled.section`
     }
     >div {
         margin: 0 0 0 8px;
+        width: 150px;
+        /* height: 25px; */
     }
 `

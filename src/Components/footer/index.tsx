@@ -23,11 +23,11 @@ function Footer() {
             history.push('/')
             alert('로그인이 필요합니다!')
         }
-        if (isLogin === false && (page === '/upload')) {
+        if (isLogin === false && (page === '/upload' || page === '/changeProfile')) {
             history.push('/')
             alert('로그인이 필요합니다!')
         }
-    }, [page])
+    }, [page, isLogin])
     useEffect(() => {
         setPage()
     }, [location.pathname])

@@ -38,11 +38,15 @@ export const ChangePageBtn = styled.div`
     justify-content: center;
     font-size: 16px;
     border: 1px solid #4a55b5;
+    cursor: pointer;
+    margin : 0 20px
 `
 
 export const SelectBtn = styled(ChangePageBtn)`
     color:white;
     background-color: #4a55b5;
+    cursor: pointer;
+    margin : 0 20px; 
 `
 
 export const ArrowBtn = styled(ChangePageBtn)`
@@ -56,5 +60,6 @@ export const ChangePageBtns = styled.div`
     color: #4a55b5;
     margin: 100px auto 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    /* justify-content: space-between; */
 `

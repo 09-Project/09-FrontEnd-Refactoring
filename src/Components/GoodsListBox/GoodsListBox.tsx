@@ -71,7 +71,7 @@ const GoodsListBox = (props: PageInfoType) => {
                             props.type === 'search' ?
                                 <S.Title>
                                     <p>"{keyword}"</p>
-                                    검색결과
+                                    검색결과
                                 </S.Title> :
                                 <S.Title>추천 상품</S.Title>
                         }

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { RootState } from '../../modules/redux';
 import { setModalOn } from '../../modules/redux/action/modal'
@@ -17,6 +17,7 @@ const HeaderTopWrapper = styled.section`
 const LoginStatusDiv = styled.section`
     display: flex;
     margin-right: 52px;
+    cursor: pointer;
     > div {
         margin: 0 5px;
     }
@@ -32,6 +33,10 @@ const HeaderTop = () => {
     const dispatch = useDispatch()
     const ModalOn = () => dispatch(setModalOn())
     const SetLogin = (status: boolean) => dispatch(setLogin(status))
+    useEffect(() => {
+        console.log('asd')
+        window.scrollTo(0, 0);
+    }, [useLocation().search])
     return <HeaderTopWrapper>{isLogin ? <LoginStatusDiv><p onClick={() => {
         SetLogin(false);
         localStorage.removeItem("access_token");

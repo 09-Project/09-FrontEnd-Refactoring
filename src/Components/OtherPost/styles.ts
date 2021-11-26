@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import DefaultImg from '../../assets/images/defaultGoods.png';
 interface PropsType {
-    img? : string;
+    img?: string;
 }
 
 export const OtherPostsWrapper = styled.section`
@@ -18,16 +18,20 @@ export const OtherPostsList = styled.div`
     box-sizing: border-box;
     padding: 16px 34px 0 34px;
     display: flex;
-    justify-content: space-between;
+    > a {
+        margin-right: 36px;
+    }
+    /* justify-content: space-between; */
     p { 
         margin-top: 8px;
         font-size: 14px;
+        width: 100px;
     }
 `
 export const OtherPostImg = styled.div`
     width: 120px;
     height: 120px;
-    background-image: url(${(props:PropsType)=>props.img || DefaultImg});
+    background-image: url(${(props: PropsType) => props.img || DefaultImg});
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;

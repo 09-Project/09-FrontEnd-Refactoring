@@ -18,6 +18,16 @@ export const Introduce = styled.div`
 export const SimpleInfo = styled.div`
     display: flex;
 `
+export const ImgDiv = styled.div`
+    width: 400px;
+    height: 400px;
+    position: relative;
+`
+export const Heart = styled.i`
+    position: absolute;
+    bottom : 16px;
+    right : 16px;
+`
 export const Img = styled.div`
     background-image: url(${(props: StyleProps) => props.img || DefaultGoods});
     width: 400px;
